@@ -14,7 +14,7 @@ import bs4 as BeautifulSoup
 import tqdm as tqdm
 
 
-path = "/Users/Daniel/export-searchables/judgments/xml"
+path = "/path/to/xml"
 os.chdir(path)
 
 for filename in tqdm.tqdm(os.listdir(path)):
@@ -26,7 +26,7 @@ for filename in tqdm.tqdm(os.listdir(path)):
         for para in paras:
             para = para.text
             with open(
-                "/Users/Daniel/PycharmProjects/ProjectBlackstone/data_extraction/text/paras.txt",
+                "/path/to/output/dirparas.txt",
                 "a",
             ) as outFile:
                 outFile.write(para)
