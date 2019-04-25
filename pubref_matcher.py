@@ -94,3 +94,12 @@ for doc in nlp.pipe(TEXTS):
     TRAINING_DATA.append(training_example)
 
 print(*TRAINING_DATA, sep="\n")
+
+#OUTPUT
+#('The name of the case is R v Horncastle [2009] AC 123', {'entities': [(39, 52, 'CITATION')]})
+#('The name of the case is R v Horncastle [2009] 1 AC 123', {'entities': [(39, 54, 'CITATION')]})
+#('The name of the case is R v Horncastle [2009] 1 Cr App R 109', {'entities': [(39, 60, 'CITATION')]})
+#('The name of the case was Boaty McBoatface [2009] EWCA Civ 123', {'entities': [(42, 61, 'CITATION')]})
+#('The name of the case was Boaty McBoatface [2009] 1 All ER 123', {'entities': [(42, 61, 'CITATION')]})
+#('The name of the case was Boaty McBoatface [2009] EWHC 123 (Admin) and we like hats.', {'entities': [(42, 57, 'CITATION'), (42, 65, 'CITATION')]})
+#("I shouldn't return any matched entities.", {'entities': []})
