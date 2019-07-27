@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+
+# Generate word embeddings for use when initialising the base model
+
 from pathlib import Path
 from gensim.models import Word2Vec, Phrases
 from gensim.models.word2vec import LineSentence
