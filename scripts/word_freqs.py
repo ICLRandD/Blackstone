@@ -3,7 +3,7 @@
 # Generate word frequencies for use when initialising the base model
 # The following code is a very slightly modified version of 
 # https://github.com/allenai/scispacy/blob/master/scripts/count_word_frequencies.py
-# The only change has been to swap the standard spaCy tokenizer in for scispacy's 
+# The only change has been to swap the standard spaCy tokenizer for scispacy's 
 # combined rule tokenizer.
 
 from typing import List, Tuple
@@ -32,7 +32,7 @@ from spacy.lang.en import English
 def count_frequencies(language_class: Language, input_path: Path):
     """
     Given a file containing single documents per line
-    (in this case, sentences from the ICLR case law corpus), split the text
+    (in this case, sentences for the ICLR case law corpus), split the text
     using a science specific tokenizer and compute word and
     document frequencies for all words.
     """
@@ -78,7 +78,7 @@ def main(raw_dir: Path, output_dir: Path, n_jobs=2):
 
     language_class = spacy.util.get_lang_class("en")
     tasks = []
-    freqs_dir = Path(tempfile.mkdtemp(prefix="scispacy_freqs"))
+    freqs_dir = Path(tempfile.mkdtemp(prefix="blackstone_freqs"))
     for input_path in [os.path.join(raw_dir, filename)
                        for filename in os.listdir(raw_dir)]:
         input_path = Path(input_path.strip())
