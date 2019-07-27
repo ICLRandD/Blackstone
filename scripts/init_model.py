@@ -1,5 +1,11 @@
 # coding: utf8
 
+# Initialise the base spaCy model from word frequencies and word vectors
+# The following code is a very slightly modified version of 
+# https://github.com/allenai/scispacy/blob/master/scripts/init_model.py
+# The only change has been to swap the standard spaCy tokenizer for scispacy's 
+# combined rule tokenizer.
+
 import os
 import sys
 import math
