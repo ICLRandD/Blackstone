@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Generate word embeddings for use when initialising the base model
+"""Generate word embeddings for use when initialising the base model."""
 
 from pathlib import Path
 from gensim.models import Word2Vec, Phrases
@@ -17,7 +17,7 @@ logging.basicConfig(
 def compute_vectors(input_path: Path, output_path: Path):
     """
     Builds word embeddings using gensim Word2Vec. This function takes
-    a file contained single sentences per line and writes to computed
+    a file contained single sentences per line and writes the computed
     vectors in text format to the specified output path. 
     """
     print(f"Processing {input_path}")
