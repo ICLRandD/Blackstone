@@ -1,6 +1,6 @@
 """
 Detects relationships between provisions and instruments identified by 
-Blackstone's NER mode. 
+Blackstone's NER model. 
 
 Example usage:
 
@@ -10,13 +10,17 @@ TEXTS = [
     "Section 1 of the Theft Act 1968 sets out the definition of theft."
 ]
 for text in TEXTS:
-    doc = nlp(text)
+    doc = nlp(text) 
     relations = extract_legislation_relations(doc)
-    for r1, r2 in relations:
-        print("{:<10}\t{}\t{}".format(r1.text, r2.ent_type_, r2.text))
+    for provision, provision_url, instrument, instrument_url in relations:
+        print(f"\n{provision.text}\t{provision_url}\t{instrument}\t{instrument_url}")
 
 """
 from typing import List, Tuple
+import re
+import requests
+import time
+
 
 def filter_spans(spans) -> List[str]:
     """
@@ -33,10 +37,22 @@ def filter_spans(spans) -> List[str]:
     return result
 
 
+def hasNumbers(inputString: str) -> bool:
+    """
+    Check if the provision candidate contains a digit.
+    """
+    return any(char.isdigit() for char in inputString)
+
+
 def extract_legislation_relations(doc) -> List[Tuple]:
     """
-    Merge entities and noun chunks into one token. 
-    Takes a spaCy doc object as input as returns a list of tuples.
+    Extract relationships between provisions and instruments identified
+    by Blackstone's NER with the assistance of the dependency parser. 
+
+    This function receives a spaCy doc and returns a list of tuples, each 
+    tuple containing the following elements:
+
+    (provision, provision_URL, instrument, instrument_URL)
     """
     spans = list(doc.ents) + list(doc.noun_chunks)
     spans = filter_spans(spans)
@@ -50,7 +66,46 @@ def extract_legislation_relations(doc) -> List[Tuple]:
             subject = [w for w in instrument.head.lefts if w.dep_ == "nsubj"]
             if subject:
                 subject = subject[0]
-                relations.append((subject, instrument))
+                if hasNumbers(subject):
+                    # Get the URL for the instrument on legislation.gov.uk
+                    target = set_legislation_target(instrument)
+                    # Get the URL for the provision
+                    provision = set_provision_target(target, subject)
+
+                else:
+                    provision = None
+            relations.append((subject, provision, instrument, target))
         elif instrument.dep_ == "pobj" and instrument.head.dep_ == "prep":
-            relations.append((instrument.head.head, instrument))
+            target = set_legislation_target(instrument)
+            provision = set_provision_target(target, instrument.head.head)
+            relations.append((instrument.head.head, provision, instrument, target))
     return relations
+
+
+def set_legislation_target(instrument: str) -> str:
+    """
+    Returns the legislation.gov.uk for the identified instrument, 
+    e.g. http://www.legislation.gov.uk/ukpga/1999/17/contents. 
+    """
+    if "Act" in instrument.text:
+        url = f"http://www.legislation.gov.uk/id?title={instrument.text}"
+        page = requests.get(url)
+        if page.status_code == 200:
+            # allow time for the URL to resolve to the stable target
+            time.sleep(0.1)
+            url = page.url
+        else:
+            url = None
+    return url
+
+
+def set_provision_target(url: str, subject: str) -> str:
+    """
+    Returns the legislation.gov.uk URL for the identified provision, 
+    e.g. http://www.legislation.gov.uk/ukpga/1998/42/section/20.
+    """
+    url = url.replace("contents", "section/")
+    provision_number = re.findall(r"\d+", str(subject))
+    matches = [match for match in provision_number]
+    url = url + str(matches[0])
+    return url
