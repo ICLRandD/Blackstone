@@ -13,7 +13,7 @@ To install Blackstone follow these steps:
 
 ### 1. Install the library
 
-The first step is to install the library, which at present contains a handful of custom spaCy component. Install the library like so:
+The first step is to install the library, which at present contains a handful of custom spaCy components. Install the library like so:
 
 ```
 pip install blackstone
@@ -29,8 +29,15 @@ pip install https://blackstone-model.s3-eu-west-1.amazonaws.com/en_blackstone_pr
 
 ## About the model
 
-This is the very first release of Blackstone and the model is best viewed as a *prototype*; it is rough around the edges and represents first step in a large and ongoing programme of open source research into NLP on legal texts. With that out of the way, here's   
+This is the very first release of Blackstone and the model is best viewed as a *prototype*; it is rough around the edges and represents first step in a large and ongoing programme of open source research into NLP on legal texts. With that out of the way, here's a brief rundown of what's happening in the proto model. 
 
+### The pipeline
+
+Blackstone's model has been built with, and upon, spaCy. This proto release combines a mixture of pipeline components that have been custom built for Blackstone, along with other  
+
+
+
+<img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/Blackstone/blackstone_pipeline.svg" height=75%>
 
 
 ## Project Name
