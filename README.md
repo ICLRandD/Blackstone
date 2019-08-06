@@ -1,3 +1,7 @@
+[logo]: https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/blackstone_seal.svg "Logo"
+
+# Blackstone
+
 # Blackstone
 Automatic enrichment of unstructured legal text using rules-based and predictive techniques
 
