@@ -117,7 +117,7 @@ def filter_matches(
             # Normal case.
             # Short form is inside the parens.
             # Sum character lengths of contents of parens.
-            QUOTES = ['"']
+            QUOTES = ['"', "'", "‘", "’", "“", "”"]
             if containsQuotes(doc.text, QUOTES):
                 abbreviation_length = sum([len(x) for x in doc[start:end]]) - 2
             else:
