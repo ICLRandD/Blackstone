@@ -172,11 +172,11 @@ sentences = [sent.text for sent in doc.sents]
 for sentence in sentences:
     doc = nlp(sentence)
     top_category = get_top_cat(doc)
-    print (f"\"{sentence}\" --> {top_category}\n")
+    print (f"\"{sentence}\" {top_category}\n")
     
->>> "In my judgment, it is patently obvious that cats are a type of dog." --> ('CONCLUSION', 0.9990500807762146)
->>> "It is a well settled principle that theft is wrong." --> ('AXIOM', 0.556410014629364)
->>> "The question is whether on the facts found by the judge, the (or a) proximate cause of the loss of the rig was “inherent vice or nature of the subject matter insured” within the meaning of clause 4.4 of the Institute Cargo Clauses (A)." --> ('ISSUE', 0.5040785074234009)
+>>> "In my judgment, it is patently obvious that cats are a type of dog." ('CONCLUSION', 0.9990500807762146)
+>>> "It is a well settled principle that theft is wrong." ('AXIOM', 0.556410014629364)
+>>> "The question is whether on the facts found by the judge, the (or a) proximate cause of the loss of the rig was “inherent vice or nature of the subject matter insured” within the meaning of clause 4.4 of the Institute Cargo Clauses (A)." ('ISSUE', 0.5040785074234009)
 ```
 
 
