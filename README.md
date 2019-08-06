@@ -36,10 +36,7 @@ This is the very first release of Blackstone and the model is best viewed as a *
 
 Blackstone's model has been built with, and upon, spaCy. This proto release combines a mixture of pipeline components that have been custom built for Blackstone, along with other  
 
-
-
 <img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/Blackstone/blackstone_pipeline.svg" height=75%>
-
 
 ## Project Name
 Blackstone 
