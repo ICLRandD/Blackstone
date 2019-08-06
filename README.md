@@ -58,7 +58,71 @@ The NER component of the Blackstone model has been trained to detect the followi
 
 ### Text Categoriser
 
+This release of Blackstone also comes with a text categoriser. In contrast with the NER component (which has been trainined to identify tokens and series of tokens of interest), other text categoriser classifier longer spans of text, such as sentences. 
 
+The Text Categoriser has been trained to classify text according to one of five mutually exclusive categories, which are as follows:
+
+| Cat        | Descriptiom  |
+| ------------- |-------------| 
+| AXIOM    | The text appears to postulate a well-established principle |
+| CONCLUSION     | The text appears to make a finding, holding, determination or conclusion | 
+| ISSUE | The text appears to discuss an issue or question   |  
+| LEGAL_TEST | The test appears to discuss a legal test |  
+| UNCAT | The text does not fall into one of the four categories above  |   
+
+## Usage
+
+### Applying the NER to text
+
+Here's an example of how the model is applied to some text:
+
+```
+import spacy
+
+# Load the model
+nlp = spacy.load("en_blackstone_proto")
+
+text = """ In R v Horncastle [2009] UKSC 1; [2010] 2 AC 373, \
+    the Supreme Court held that cats are actually a type of dog.
+       """
+       
+# Apply the model to the text
+doc = nlp(text)
+
+# Iterate through the entities identified by the model
+for ent in doc.ents:
+    print(ent.text, ent.label_)
+
+R v Horncastle CASENAME
+[2009] UKSC 1 CITATION
+[2010] 2 AC 373 CITATION
+Supreme Court COURT
+
+```
+
+spaCy ships with an excellent set of visualisers, including a visualiser for NER predicts. Blackstone comes with a custom colour palette that can be used to make it easier to distiguish entities on the source text. 
+
+```
+import spacy
+from spacy import displacy
+from blackstone.displacy_palette import ner_displacy_options
+
+nlp = spacy.load("en_blackstone_proto")
+
+text = """
+The applicant must satisfy a high standard. This is a case where the action is to be tried by a judge with a jury. The standard is set out in Jameel v Wall Street Journal Europe Sprl [2004] EMLR 89, para 14:
+“But every time a meaning is shut out (including any holding that the words complained of either are, or are not, capable of bearing a defamatory meaning) it must be remembered that the judge is taking it upon himself to rule in effect that any jury would be perverse to take a different view on the question. It is a high threshold of exclusion. Ever since Fox’s Act 1792 (32 Geo 3, c 60) the meaning of words in civil as well as criminal libel proceedings has been constitutionally a matter for the jury. The judge’s function is no more and no less than to pre-empt perversity. That being clearly the position with regard to whether or not words are capable of being understood as defamatory or, as the case may be, non-defamatory, I see no basis on which it could sensibly be otherwise with regard to differing levels of defamatory meaning. Often the question whether words are defamatory at all and, if so, what level of defamatory meaning they bear will overlap.”
+18 In Berezovsky v Forbes Inc [2001] EMLR 1030, para 16 Sedley LJ had stated the test this way:
+“The real question in the present case is how the courts ought to go about ascertaining the range of legitimate meanings. Eady J regarded it as a matter of impression. That is all right, it seems to us, provided that the impression is not of what the words mean but of what a jury could sensibly think they meant. Such an exercise is an exercise in generosity, not in parsimony.”
+"""
+
+doc = nlp(text)
+
+# Call displacy and pass `ner_displacy_options` into the option parameter`
+displacy.serve(doc, style="ent", options=ner_displacy_options)
+```
+
+Which produces something that looks like this:
 
 <img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/Blackstone/displacy.png">
 
