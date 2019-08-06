@@ -77,6 +77,8 @@ The Text Categoriser has been trained to classify text according to one of five 
 Here's an example of how the model is applied to some text:
 
 ```
+"""Extract some entities for a passage of text"""
+
 import spacy
 
 # Load the model
@@ -99,10 +101,17 @@ R v Horncastle CASENAME
 Supreme Court COURT
 
 ```
+#### Visualising entities
 
 spaCy ships with an excellent set of visualisers, including a visualiser for NER predicts. Blackstone comes with a custom colour palette that can be used to make it easier to distiguish entities on the source text. 
 
 ```
+"""
+Visualise entities using spaCy's displacy visualiser. 
+
+Blackstone has a custom colour palette: `from blackstone.displacy_palette import ner_displacy options`
+"""
+
 import spacy
 from spacy import displacy
 from blackstone.displacy_palette import ner_displacy_options
