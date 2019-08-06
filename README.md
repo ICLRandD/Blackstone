@@ -1,9 +1,13 @@
-<img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/blackstone_seal.svg">
+<img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/blackstone_seal.svg" height=75%>
 
 # Blackstone
 Automatic enrichment of unstructured legal text using rules-based and predictive techniques
 
 ## Installation
+
+**Note!** 
+
+It is strongly recommended that you install Blackstone into a virtual environment! See [here](https://realpython.com/python-virtual-environments-a-primer/) for more on virtual environments.
 
 To install Blackstone follow these steps:
 
@@ -22,6 +26,10 @@ The second step is to install the spaCy model. Install the model like so:
 ```
 pip install https://blackstone-model.s3-eu-west-1.amazonaws.com/en_blackstone_proto-0.0.1.tar.gz
 ```
+
+## About the model
+
+This is the very first release of Blackstone and the model is best viewed as a *prototype*; it is rough around the edges and represents first step in a large and ongoing programme of open source research into NLP on legal texts. With that out of the way, here's   
 
 
 
