@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.md
+requirements.in
+setup.py
+blackstone/__init__.py
+blackstone/abbreviations.py
+blackstone/compound_cases.py
+blackstone/legislation_linker.py
+blackstone/version.py
+blackstone.egg-info/PKG-INFO
+blackstone.egg-info/SOURCES.txt
+blackstone.egg-info/dependency_links.txt
+blackstone.egg-info/requires.txt
+blackstone.egg-info/top_level.txt

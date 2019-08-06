@@ -1,0 +1,5 @@
+spacy>=2.1.4
+requests
+conllu
+numpy
+pandas

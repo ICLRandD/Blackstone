@@ -8,8 +8,8 @@ Instructions for creating a release of the scispacy library.
 3. Create the distribution by running "python setup.py sdist" in the root of the repository.
 4. Check you can install the new distribution in a clean environment.
 5. Upload the distribution to pypi by running "twine upload <path to the distribution> -u <username> -p <password>".
-   This step will ask you for a username and password - the username is "scispacy" you can
-   get the password from LastPass.
+   This step will ask you for a username and password - the username is "iclr-d" you can
+   get the password from ICLR&D
 """
 
 VERSION = {}
@@ -20,7 +20,7 @@ with open("blackstone/version.py", "r") as version_file:
 setup(
     name = 'blackstone',
     version = VERSION["VERSION"],
-    url = 'research.iclr.co.uk/blackstone',
+    url = 'https://research.iclr.co.uk/blackstone',
     author = 'ICLR&D (Incorporated Council of Law Reporting Research Lab)',
     author_email = 'research@iclr.co.uk',
     description = 'A SpaCy pipeline and models for long-from legal text.',
@@ -29,12 +29,11 @@ setup(
     keywords = ["law caselaw lawtech legaltech nlp spacy SpaCy biomedical"],
     classifiers=[
         'Intended Audience :: Science/Research',
-        'Development Status :: 1 - Alpha',
+        'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python :: 3.6',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
-        'Topic :: Scientific/Engineering :: Legal-informatics',
-    ],
+         ],
     packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     license="Apache",
     install_requires=[
