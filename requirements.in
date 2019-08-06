@@ -9,3 +9,6 @@ requests
 # Required for testing.
 pytest
 pytest-cov
+
+# Required for releases.
+twine
