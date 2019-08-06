@@ -76,7 +76,7 @@ The Text Categoriser has been trained to classify text according to one of five 
 
 Here's an example of how the model is applied to some text:
 
-```
+```python
 """Extract some entities for a passage of text"""
 
 import spacy
@@ -95,10 +95,10 @@ doc = nlp(text)
 for ent in doc.ents:
     print(ent.text, ent.label_)
 
-R v Horncastle CASENAME
-[2009] UKSC 1 CITATION
-[2010] 2 AC 373 CITATION
-Supreme Court COURT
+>>> R v Horncastle CASENAME
+>>> [2009] UKSC 1 CITATION
+>>> [2010] 2 AC 373 CITATION
+>>> Supreme Court COURT
 
 ```
 #### Visualising entities
@@ -156,10 +156,7 @@ def get_top_cat(doc):
     max_cat = max_cats[0]
     return (max_cat, max_score)
 
-text = """
-       In my judgment, it is patently obvious that cats are a type of dog. 
-       It is a well settled principle that theft is wrong.
-       """
+text = """It is a well-established principle of law that the transactions of independent states between each other are governed by other laws than those which municipal courts administer. It is, however, in my judgment, insufficient to react to the danger of over-formalisation and “judicialisation” simply by emphasising flexibility and context-sensitivity. The question is whether on the facts found by the judge, the (or a) proximate cause of the loss of the rig was “inherent vice or nature of the subject matter insured” within the meaning of clause 4.4 of the Institute Cargo Clauses (A)."""
 
 # Apply the model to the text
 doc = nlp(text)
@@ -172,7 +169,13 @@ for sentence in sentences:
     doc = nlp(sentence)
     top_category = get_top_cat(doc)
     print (f"\"{sentence}\" --> {top_category}\n")
+    
+>>> "In my judgment, it is patently obvious that cats are a type of dog." --> ('CONCLUSION', 0.9990500807762146)
+>>> "It is a well settled principle that theft is wrong." --> ('AXIOM', 0.556410014629364)
+>>> "The question is whether on the facts found by the judge, the (or a) proximate cause of the loss of the rig was “inherent vice or nature of the subject matter insured” within the meaning of clause 4.4 of the Institute Cargo Clauses (A)." --> ('ISSUE', 0.5040785074234009)
 ```
+
+
 
 
     
