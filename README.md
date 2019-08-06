@@ -6,9 +6,7 @@ Automatic enrichment of unstructured legal text using rules-based and predictive
 
 ## Installation
 
-**Note!** 
-
-It is strongly recommended that you install Blackstone into a virtual environment! See [here](https://realpython.com/python-virtual-environments-a-primer/) for more on virtual environments.
+**Note!** It is strongly recommended that you install Blackstone into a virtual environment! See [here](https://realpython.com/python-virtual-environments-a-primer/) for more on virtual environments.
 
 To install Blackstone follow these steps:
 
