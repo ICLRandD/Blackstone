@@ -14,45 +14,39 @@ Instructions for creating a release of the scispacy library.
 
 VERSION = {}
 # version.py defines VERSION and VERSION_SHORT variables.
-# We use exec here to read it so that we don't import scispacy
-# whilst setting up the package.
-with open("scispacy/version.py", "r") as version_file:
+with open("blackstone/version.py", "r") as version_file:
     exec(version_file.read(), VERSION)
 
 setup(
-    name = 'scispacy',
+    name = 'blackstone',
     version = VERSION["VERSION"],
-    url = 'https://allenai.github.io/SciSpaCy/',
-    author = 'Allen Institute for Artificial Intelligence',
-    author_email = 'ai2-info@allenai.org',
-    description = 'A full SpaCy pipeline and models for scientific/biomedical documents.',
+    url = 'research.iclr.co.uk/blackstone',
+    author = 'ICLR&D (Incorporated Council of Law Reporting Research Lab)',
+    author_email = 'research@iclr.co.uk',
+    description = 'A SpaCy pipeline and models for long-from legal text.',
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    keywords = ["bioinformatics nlp spacy SpaCy biomedical"],
+    keywords = ["law caselaw lawtech legaltech nlp spacy SpaCy biomedical"],
     classifiers=[
         'Intended Audience :: Science/Research',
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 1 - Alpha',
         'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python :: 3.6',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
-        'Topic :: Scientific/Engineering :: Bio-Informatics',
+        'Topic :: Scientific/Engineering :: Legal-informatics',
     ],
     packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     license="Apache",
     install_requires=[
-        "spacy>=2.1.3",
-        "awscli",
+        "spacy>=2.1.4",
+        "requests",
         "conllu",
         "numpy",
-        "joblib",
-        "nmslib>=1.7.3.6",
-        "scikit-learn>=0.20.3"
+        "pandas",
         ],
     tests_require=[
         "pytest",
         "pytest-cov",
-        "pylint",
-        "mypy"
         ],
     python_requires='>=3.6.0',
 )
