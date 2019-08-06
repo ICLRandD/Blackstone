@@ -25,16 +25,47 @@ The second step is to install the spaCy model. Install the model like so:
 ```
 pip install https://blackstone-model.s3-eu-west-1.amazonaws.com/en_blackstone_proto-0.0.1.tar.gz
 ```
-
 ## About the model
 
-This is the very first release of Blackstone and the model is best viewed as a *prototype*; it is rough around the edges and represents first step in a large and ongoing programme of open source research into NLP on legal texts. With that out of the way, here's a brief rundown of what's happening in the proto model. 
+This is the very first release of Blackstone and the model is best viewed as a *prototype*; it is rough around the edges and represents first step in a large and ongoing programme of open source research into NLP on legal texts. With that out of the way, here's a brief rundown of what's happening in the proto model.
+
+Blackstone is a spaCy model and pipeline, which means you can apply the model to your own text data using spaCy's APIs. 
 
 ### The pipeline
 
-Blackstone's model has been built with, and upon, spaCy. This proto release combines a mixture of pipeline components that have been custom built for Blackstone, along with other  
+Blackstone's model has been built with, and upon, spaCy. This proto release combines a mixture of pipeline components that have been custom built for Blackstone, along with other
 
-<img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/Blackstone/blackstone_pipeline.svg" height=75%>
+The proto model included in this release has the following elements in its pipeline:
+
+<img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/Blackstone/blackstone_pipeline.svg">
+
+Owing to a complete dearth of labelled part-of-speech and dependency training data for legal text, the `tokenizer`, `tagger` and `parser` pipeline components have been taken from spaCy's `en_core_web_sm` model. By and large, these components appear to a do a decent job, but it would be good to revisit these components with custom training data at some point in the future. 
+
+The `ner` and `textcat` components are custom components trained especially for Blackstone. 
+
+### Named-Entity Recogniser
+
+The NER component of the Blackstone model has been trained to detect the following entity types:
+
+| Ent        | Name           | Descriptiom  |
+| ------------- |-------------| -----:|
+| CASENAME    | Case names | e.g. *Smith v Jones*, *In re Jones*, In *Jones'* case |
+| CITATION      | Citations (unique identifiers for reported and unreported cases)     |   e.g. (2002) 2 Cr App R 123 |
+| INSTRUMENT | Written legal instruments     |    e.g. Theft Act 1968, European Convention on Human Rights, CPR |
+| PROVISION | Unit within a written legal instrument   |    e.g. section 1, art 2(3) |
+| COURT | Court or tribunal   |    e.g. Court of Appeal, Upper Tribunal |
+| JUDGE | References to judges |    e.g. Eady J, Lord Bingham of Cornhill |
+
+### Text Categoriser
+
+
+
+<img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/Blackstone/displacy.png">
+
+ 
+
+  
+
 
 ## Project Name
 Blackstone 
