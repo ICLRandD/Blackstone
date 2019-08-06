@@ -1,0 +1,11 @@
+numpy
+spacy>=2.1.4
+pandas
+conllu
+
+#required for legislation_linker
+requests
+
+# Required for testing.
+pytest
+pytest-cov
