@@ -105,7 +105,7 @@ for ent in doc.ents:
 
 spaCy ships with an excellent set of visualisers, including a visualiser for NER predicts. Blackstone comes with a custom colour palette that can be used to make it easier to distiguish entities on the source text. 
 
-```
+```python
 """
 Visualise entities using spaCy's displacy visualiser. 
 
@@ -139,7 +139,7 @@ Which produces something that looks like this:
 
 Blackstone's text categoriser generates a predicted categorisation for a `doc`. The `textcat` pipeline component has been designed to be applied to individual sentences rather than a single document consisting of many sentences. 
 
-```
+```python
 import spacy
 
 # Load the model
@@ -156,7 +156,11 @@ def get_top_cat(doc):
     max_cat = max_cats[0]
     return (max_cat, max_score)
 
-text = """It is a well-established principle of law that the transactions of independent states between each other are governed by other laws than those which municipal courts administer. It is, however, in my judgment, insufficient to react to the danger of over-formalisation and “judicialisation” simply by emphasising flexibility and context-sensitivity. The question is whether on the facts found by the judge, the (or a) proximate cause of the loss of the rig was “inherent vice or nature of the subject matter insured” within the meaning of clause 4.4 of the Institute Cargo Clauses (A)."""
+text = """
+It is a well-established principle of law that the transactions of independent states between each other are governed by other laws than those which municipal courts administer. \
+It is, however, in my judgment, insufficient to react to the danger of over-formalisation and “judicialisation” simply by emphasising flexibility and context-sensitivity. \
+The question is whether on the facts found by the judge, the (or a) proximate cause of the loss of the rig was “inherent vice or nature of the subject matter insured” within the meaning of clause 4.4 of the Institute Cargo Clauses (A).
+"""
 
 # Apply the model to the text
 doc = nlp(text)
