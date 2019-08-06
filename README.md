@@ -47,7 +47,7 @@ The `ner` and `textcat` components are custom components trained especially for 
 
 The NER component of the Blackstone model has been trained to detect the following entity types:
 
-| Ent        | Name           | Descriptiom  |
+| Ent        | Name           | Examples  |
 | ------------- |-------------| -----:|
 | CASENAME    | Case names | e.g. *Smith v Jones*, *In re Jones*, In *Jones'* case |
 | CITATION      | Citations (unique identifiers for reported and unreported cases)     |   e.g. (2002) 2 Cr App R 123 |
