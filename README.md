@@ -1,9 +1,28 @@
-[logo]: https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/blackstone_seal.svg "Logo"
-
-# Blackstone
+<img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/blackstone_seal.svg">
 
 # Blackstone
 Automatic enrichment of unstructured legal text using rules-based and predictive techniques
+
+## Installation
+
+To install Blackstone follow these steps:
+
+### 1. Install the library
+
+The first step is to install the library, which at present contains a handful of custom spaCy component. Install the library like so:
+
+```
+pip install blackstone
+```
+
+### 2. Install the model
+
+The second step is to install the spaCy model. Install the model like so:
+
+```
+pip install https://blackstone-model.s3-eu-west-1.amazonaws.com/en_blackstone_proto-0.0.1.tar.gz
+```
+
 
 
 ## Project Name
