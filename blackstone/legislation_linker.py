@@ -13,7 +13,7 @@ for text in TEXTS:
     doc = nlp(text) 
     relations = extract_legislation_relations(doc)
     for provision, provision_url, instrument, instrument_url in relations:
-        print(f"\n{provision.text}\t{provision_url}\t{instrument}\t{instrument_url}")
+        print(f"\n{provision}\t{provision_url}\t{instrument}\t{instrument_url}")
 
 """
 from typing import List, Tuple
@@ -91,7 +91,6 @@ def set_legislation_target(instrument: str) -> str:
     """
     if "Act" in instrument.text:
         url = f"http://www.legislation.gov.uk/id?title={instrument.text}"
-        print (url)
         page = requests.get(url)
         if page.status_code == 200:
             # allow time for the URL to resolve to the stable target
