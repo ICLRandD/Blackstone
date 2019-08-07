@@ -16,6 +16,7 @@ The problem, as we see it, is that legal NLP research in the UK has become over 
 
 * So far as we are aware, Blackstone is the first open source model trained for use on long-form texts containing common law entities and concepts.
 * Blackstone is built on [spaCy](https://spacy.io/), which makes it easy to pick up and apply to your own data.
+* Blackstone has been trained on data spanning a considerable temporal period (as early as texts drafted in the 1860s). This is useful because an interesting quirk of the common law is that older writings (particularly, judgments) go on to remain relevant for many, many years. 
 * It is free and open source
 * It is imperfect and makes no attempt to hide that fact from you
 
@@ -95,7 +96,7 @@ The Text Categoriser has been trained to classify text according to one of five 
 
 ### Applying the NER model
 
-Here's an example of how the model is applied to some text taken from para 31 of the Divisional Court's judgment in *R (Miller) v Secretary of State for Exiting the European Union (Birnie intervening)* \[2017] UKSC 5; \[2018] AC 61; :
+Here's an example of how the model is applied to some text taken from para 31 of the Divisional Court's judgment in *R (Miller) v Secretary of State for Exiting the European Union (Birnie intervening)* \[2017] UKSC 5; \[2018] AC 61:
 
 ```python
 import spacy
@@ -125,7 +126,7 @@ for ent in doc.ents:
 ```
 #### Visualising entities
 
-[spaCy](https://spacy.io/) ships with an excellent set of visualisers, including a visualiser for NER predicts. Blackstone comes with a custom colour palette that can be used to make it easier to distiguish entities on the source text when using displacy. 
+[spaCy](https://spacy.io/) ships with an excellent [set of visualisers](https://spacy.io/usage/visualizers), including a visualiser for NER predicts. Blackstone comes with a custom colour palette that can be used to make it easier to distiguish entities on the source text when using displacy. 
 
 ```python
 """
@@ -205,17 +206,17 @@ for sentence in sentences:
 
 In addition to the core model, this proto release of Blackstone comes with three custom components:
 
-* Abbreviation detection - this is *heavily* based on the `AbbreviationDetector()` component in [scispacy] and resolves an abrreviated form to its long form definition, e.g. `HRA 1998` -> `Human Rights Act 1998`.
+* Abbreviation detection - this is *heavily* based on the `AbbreviationDetector()` component in [scispacy] and resolves an abbreviated form to its long form definition, e.g. `ECtHR` -> `European Court of Human Rights`.
 * Legislation linker - this is an alpha component that attempts to resolve references to provisons to their parent instrument (more on this further down the README).
 * Compound case reference detection - again, this is an alpha component that attempts identify `CASENAME` and `CITATION` pairs enabling the merging of a `CITATION` to its parent `CASENAME`.
 
-### Abbreviation and long-form definition resolution
+### Abbreviation detection and long-form definition resolution
 
-It is not uncommon in for authors of legal documents to abbreviate long-winded terms that will be used instead of the long-form througout the rest of the document. For example,
+It is not uncommon for authors of legal documents to abbreviate long-winded terms that will be used instead of the long-form througout the rest of the document. For example,
 
 > The European Court of Human Rights ("ECtHR") is the court ultimately responsible for applying the European Convention on Human Rights ("ECHR"). 
 
-The abbreviation detection component in Blackstone seeks to address this by implementing an ever so slightly modified version of [scispaCy's](https://allenai.github.io/scispacy/) `AbbreviationDetector()` (which is itself an implementation of the approach set out in this paper). Our implementation still has some problems, but an example of its usage is as follows:
+The abbreviation detection component in Blackstone seeks to address this by implementing an ever so slightly modified version of [scispaCy's](https://allenai.github.io/scispacy/) `AbbreviationDetector()` (which is itself an implementation of the approach set out in this paper: https://psb.stanford.edu/psb-online/proceedings/psb03/schwartz.pdf). Our implementation still has some problems, but an example of its usage is as follows:
 
 ```python
 import spacy
@@ -242,13 +243,13 @@ for abrv in doc._.abbreviations:
 
 The compound case reference detection component in Blackstone is designed to marry up `CITATION` entities with their parent `CASENAME` entities. 
 
-Common law jurisdictions typically relate to case references through a coupling of a name (that is typically derived from the names of the parties in the case) and some unique citation to identify where the case has been reported, like so:
+Common law jurisdictions typically relate to case references through a coupling of a name (typically derived from the names of the parties in the case) and some unique citation to identify where the case has been reported, like so:
 
 > Regina v Horncastle \[2010] 2 AC 373
 
-Blackstone's NER model separately attempts to identify the `CASENAME` and `CITATION` components. However, it is potentially useful (particularly in the context of information extraction) to pull these out as pairs. 
+Blackstone's NER model separately attempts to identify the `CASENAME` and `CITATION` entities. However, it is potentially useful (particularly in the context of information extraction) to pull these entities out as pairs. 
 
-`CompoundCases()` applies a custom pipe to after the NER and identifies `CASENAME`/`CITATION` pairs in two scenarios:
+`CompoundCases()` applies a custom pipe after the NER and identifies `CASENAME`/`CITATION` pairs in two scenarios:
 
 * The standard scenario: Gelmini v Moriggia \[1913] 2 KB 549
 * The possessive scenario (which is a little antiquated): Jone's case \[1915] 1 KB 45
