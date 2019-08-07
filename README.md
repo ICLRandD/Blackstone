@@ -188,6 +188,14 @@ In addition to the core model, this proto release of Blackstone comes with three
 * Legislation linker - this is an alpha component that attempts to resolve references to provisons to their parent instrument (more on this further down the README).
 * Compound case reference detection - again, this is an alpha component that attempts identify `CASENAME` and `CITATION` pairs enabling the merging of a `CITATION` to its parent `CASENAME`.
 
+### Abbreviation and long-form definition resolution
+
+It is not uncommon in for authors of legal documents to abbreviate long-winded terms that will be used instead of the long-form througout the rest of the document. For example,
+
+> The European Court of Human Rights ("ECtHR") is the court ultimately responsible for applying the European Convention on Human Rights ("ECHR"). The ECHR has been incorporated into English law by the Human Rights Act 1998 ("HRA 1998"). 
+
+The abbreviation detection component in Blackstone seeks to address this by implementing an ever so slightly modified version of scispaCy's `AbbreviationDetector()` (which is itself an implementation of the approach set out in this paper). 
+
 
     
     
