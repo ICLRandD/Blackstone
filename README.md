@@ -84,7 +84,7 @@ This release of Blackstone also comes with a text categoriser. In contrast with 
 
 The Text Categoriser has been trained to classify text according to one of five mutually exclusive categories, which are as follows:
 
-| Cat        | Descriptiom  |
+| Cat        | Description  |
 | ------------- |-------------| 
 | AXIOM    | The text appears to postulate a well-established principle |
 | CONCLUSION     | The text appears to make a finding, holding, determination or conclusion | 
