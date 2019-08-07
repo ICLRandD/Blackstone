@@ -70,14 +70,16 @@ def extract_legislation_relations(doc) -> List[Tuple]:
                     # Get the URL for the instrument on legislation.gov.uk
                     target = set_legislation_target(instrument)
                     # Get the URL for the provision
-                    provision = set_provision_target(target, subject)
+                    if target:
+                        provision = set_provision_target(target, subject)
 
                 else:
                     provision = "None"
             relations.append((subject, provision, instrument, target))
         elif instrument.dep_ == "pobj" and instrument.head.dep_ == "prep":
             target = set_legislation_target(instrument)
-            provision = set_provision_target(target, instrument.head.head)
+            if target:
+                provision = set_provision_target(target, instrument.head.head)
             relations.append((instrument.head.head, provision, instrument, target))
     return relations
 
@@ -89,14 +91,18 @@ def set_legislation_target(instrument: str) -> str:
     """
     if "Act" in instrument.text:
         url = f"http://www.legislation.gov.uk/id?title={instrument.text}"
+        print (url)
         page = requests.get(url)
         if page.status_code == 200:
             # allow time for the URL to resolve to the stable target
             time.sleep(0.1)
-            url = page.url
+            target_url = page.url
         else:
-            url = "None"
-    return url
+            target_url = "None"
+    
+    url_targert = target_url
+
+    return url_targert
 
 
 def set_provision_target(url: str, subject: str) -> str:
