@@ -2,7 +2,28 @@
 <img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/blackstone_seal.svg" height=75%>
 
 # Blackstone
-Automatic enrichment of unstructured legal text using rules-based and predictive techniques
+Blackstone is a [spaCy](https://spacy.io/) model and library for processing long-form, unstructured legal text. Blackstone is an experimental research project in the [Incorporated Council of Law Reporting for England and Wales'](https://iclr.co.uk/) research lab, [ICLR&D](https://research.iclr.co.uk/).
+
+## Why are we building Blackstone?
+
+The past several years have seen a surge in activity at the intersection of law and technology. However, in the United Kingdom, the overwhelming bulk of that activity has taken place in law firms and other commercial contexts. The consequence of this is that notwithstanding the never ending flurry of development in the legal-informatics space, almost none of the research is made available on an open-source basis. 
+
+Moreover, the majoritry of research in the UK legal-informatics domain (whether open or closed) has focussed on the development of NLP applications for automating contracts and other legal documents that are transactional in nature. This is understandable, because the principal benefactors of legal NLP research in the UK are law firms and law firms tend not to find it difficult to get their hands on transactional documentation that can be harnessed as training data. 
+
+The problem, as we see it, is that legal NLP research in the UK has become over concentrated in commercial applications and that it is worthwhile making the investment in developing legal NLP research available with respect to other legal texts, such as judgments, scholarly articles, skeleton arguments and pleadings. 
+
+## What's special about Blackstone?
+
+* So far as we are aware, Blackstone is the first open source model trained for use on long-form texts containing common law entities and concepts.
+* Blackstone is built on [spaCy](https://spacy.io/), which makes it easy to pick up and apply to your own data.
+* It is free and open source
+
+## Observations and other things worth noting:
+
+* Perfection is the enemy of the good. This is a prototype release of highly experimental project. As such, the accuracy of Blackstone's models leaves something to be desired (F1 on the NER is approx 70%). The accuracy of these models will improve over time. 
+* The models have been trained on English case law and the library has been built with the peculiarities of legal system of England and Wales in mind. That said, the model is has generalised well and should do a reasonably good job on Australasian, Canadian and American content, too.
+* The data used to train Blackstone's models was derived from the [Incorporated Council of Law Reporting for England and Wales'](https://iclr.co.uk/) archive of case reports and unreported judgments. That archive is proprietary and this prevents us from releasing any of the data used to train Blackstone.  
+
 
 ## Installation
 
@@ -12,7 +33,7 @@ To install Blackstone follow these steps:
 
 ### 1. Install the library
 
-The first step is to install the library, which at present contains a handful of custom spaCy components. Install the library like so:
+The first step is to install the library, which at present contains a handful of custom [spaCy](https://spacy.io/) components. Install the library like so:
 
 ```
 pip install blackstone
@@ -20,7 +41,7 @@ pip install blackstone
 
 ### 2. Install the model
 
-The second step is to install the spaCy model. Install the model like so:
+The second step is to install the [spaCy](https://spacy.io/) model. Install the model like so:
 
 ```
 pip install https://blackstone-model.s3-eu-west-1.amazonaws.com/en_blackstone_proto-0.0.1.tar.gz
@@ -29,17 +50,15 @@ pip install https://blackstone-model.s3-eu-west-1.amazonaws.com/en_blackstone_pr
 
 This is the very first release of Blackstone and the model is best viewed as a *prototype*; it is rough around the edges and represents first step in a large and ongoing programme of open source research into NLP on legal texts. With that out of the way, here's a brief rundown of what's happening in the proto model.
 
-Blackstone is a spaCy model and pipeline, which means you can apply the model to your own text data using spaCy's APIs. 
+Blackstone is a [spaCy](https://spacy.io/) model and pipeline, which means you can apply the model to your own text data using [spaCy's](https://spacy.io/) APIs. 
 
 ### The pipeline
-
-Blackstone's model has been built with, and upon, spaCy. This proto release combines a mixture of pipeline components that have been custom built for Blackstone, along with other
 
 The proto model included in this release has the following elements in its pipeline:
 
 <img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/Blackstone/blackstone_pipeline.svg">
 
-Owing to a complete dearth of labelled part-of-speech and dependency training data for legal text, the `tokenizer`, `tagger` and `parser` pipeline components have been taken from spaCy's `en_core_web_sm` model. By and large, these components appear to a do a decent job, but it would be good to revisit these components with custom training data at some point in the future. 
+Owing to a complete dearth of labelled part-of-speech and dependency training data for legal text, the `tokenizer`, `tagger` and `parser` pipeline components have been taken from [spaCy's](https://spacy.io/) `en_core_web_sm` model. By and large, these components appear to a do a decent job, but it would be good to revisit these components with custom training data at some point in the future. 
 
 The `ner` and `textcat` components are custom components trained especially for Blackstone. 
 
@@ -104,7 +123,7 @@ for ent in doc.ents:
 ```
 #### Visualising entities
 
-spaCy ships with an excellent set of visualisers, including a visualiser for NER predicts. Blackstone comes with a custom colour palette that can be used to make it easier to distiguish entities on the source text. 
+[spaCy](https://spacy.io/)ships with an excellent set of visualisers, including a visualiser for NER predicts. Blackstone comes with a custom colour palette that can be used to make it easier to distiguish entities on the source text. 
 
 ```python
 """
@@ -194,7 +213,7 @@ It is not uncommon in for authors of legal documents to abbreviate long-winded t
 
 > The European Court of Human Rights ("ECtHR") is the court ultimately responsible for applying the European Convention on Human Rights ("ECHR"). 
 
-The abbreviation detection component in Blackstone seeks to address this by implementing an ever so slightly modified version of scispaCy's `AbbreviationDetector()` (which is itself an implementation of the approach set out in this paper). Our implementation still has some problems, but an example of its usage is as follows:
+The abbreviation detection component in Blackstone seeks to address this by implementing an ever so slightly modified version of [scispaCy's](https://allenai.github.io/scispacy/) `AbbreviationDetector()` (which is itself an implementation of the approach set out in this paper). Our implementation still has some problems, but an example of its usage is as follows:
 
 ```python
 import spacy
@@ -251,60 +270,33 @@ for compound_ref in doc._.compound_cases:
 >>> Jone's case [1915] 1 KB 45
 ```
 
+### Legislation linker
 
+Blackstone's Legislation Linker attempts to couple a reference to a `PROVISION` to it's parent `INSTRUMENT` by using the NER model to identify the presence of an `INSTRUMENT` and then navigating the dependency tree to identify the child provision. 
+
+Once Blackstone has identified a `PROVISION`:`CASENAME` pair, it will attempt to generate target URLs to both the provision and the instrument on [legislation.gov.uk](https://legislation.gov.uk).
+
+```python
+import spacy
+from blackstone.legislation_linker import extract_legislation_relations
+nlp = spacy.load("en_blackstone_proto")
+
+text = "The Secretary of State was at pains to emphasise that, if a withdrawal agreement is made, it is very likely to be a treaty requiring ratification and as such would have to be submitted for review by Parliament, acting separately, under the negative resolution procedure set out in section 20 of the Constitutional Reform and Governance Act 2010. Theft is defined in section 1 of the Theft Act 1968"
+
+doc = nlp(text) 
+relations = extract_legislation_relations(doc)
+for provision, provision_url, instrument, instrument_url in relations:
+    print(f"\n{provision}\t{provision_url}\t{instrument}\t{instrument_url}")
     
-    
+>>> section 20      http://www.legislation.gov.uk/ukpga/2010/25/section/20  Constitutional Reform and Governance Act 2010   http://www.legislation.gov.uk/ukpga/2010/25/contents
 
-  
+>>> section 1       http://www.legislation.gov.uk/ukpga/1968/60/section/1   Theft Act 1968  http://www.legislation.gov.uk/ukpga/1968/60/contents
+```
 
+## Thanks
 
-## Project Name
-Blackstone 
+We would like to thank the following people/organisations who have helped us (directly or indirectly) to build this prototype.
 
-## Project Keywords
-Natural language processing; machine-learning; unstructured text data
-
-## Problem Space
-Automatic enrichment of unstructured legal texts, with an emphasis on judgments and other long-form legal material (e.g. academic articles, reports etc). Enrichment of contracts is already well-served and therefore does not fall within the scope of this project. 
-
-## Project Description
-There is no shortage of commercial, closed-source software that uses natural language processing and computational linguists to provide insight into unstructured legal texts, such as contracts, credit agreements and leases.
-
-The purpose of Blackstone is to apply similar techniques, technologies and strategies to other types of unstructured legal texts, particularly judgments, in order to generate an open-source model that can be used and extended by others.
-
-**Phase 1**
-
-The initial focus of the project will be to develop a model that is capable of automatically identifying the following fundamental entity types that are peculiar to legal writing:
-
-Case titles - e.g. Regina v Smith
-
-Neutral citations - e.g. `[2019] EWCA Crim 345`
-
-Regular citations - e.g. `[2015] AC 345` or `[2015] 2 Cr App R 7`
-
-Primary legislation - e.g. `Criminal Justice Act 2003`
-
-Secondary legislation - e.g. `The Wine (Amendment) Regulations 2019`
-
-Regnal years - e.g. `8 & 9 Geo. 6, c. 4`
-
-**Phase 2**
-
-The second phase of the project will focus on extending the model developed in Phase 1 to identify the following:
-
-Instances in which the author appears to postulate an axiom of the law (e.g. It is a well-established principle that...)
-Instances of ratio in judgments
-Instances in which earlier authority is being subjected to "judicial consideration" going beyond mere citation (e.g. where an earlier authority is subject to positive or negative judicial consideration)
-
-## Tooling
-#### Dataset 
-XML archive of law reports published by ICLR dating back to 1865 and raw text of unreported judgments dating back to 2000.
-
-#### Runtime 
-Python 3.6+
-
-## Core Libraries 
-spaCy and Pandas
-
-## Other tools 
-Prodigy for model refinement and testing, Jupyter for experiments.
+* [Mark Neumann](https://twitter.com/MarkNeumannnn) of [AI2](https://allenai.org/) and [scispaCy](https://allenai.github.io/scispacy/)
+* [Explosion AI](https://explosion.ai/) for building [spaCy](https://spacy.io/) and [Prodigy](https://prodi.gy/)
+* [Kristin Hodgins](https://twitter.com/kristinhodgins) of the Office of the Attorney General of British Columbia
