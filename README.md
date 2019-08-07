@@ -192,9 +192,30 @@ In addition to the core model, this proto release of Blackstone comes with three
 
 It is not uncommon in for authors of legal documents to abbreviate long-winded terms that will be used instead of the long-form througout the rest of the document. For example,
 
-> The European Court of Human Rights ("ECtHR") is the court ultimately responsible for applying the European Convention on Human Rights ("ECHR"). The ECHR has been incorporated into English law by the Human Rights Act 1998 ("HRA 1998"). 
+> The European Court of Human Rights ("ECtHR") is the court ultimately responsible for applying the European Convention on Human Rights ("ECHR"). 
 
-The abbreviation detection component in Blackstone seeks to address this by implementing an ever so slightly modified version of scispaCy's `AbbreviationDetector()` (which is itself an implementation of the approach set out in this paper). 
+The abbreviation detection component in Blackstone seeks to address this by implementing an ever so slightly modified version of scispaCy's `AbbreviationDetector()` (which is itself an implementation of the approach set out in this paper). Our implementation still has some problems, but an example of its usage is as follows:
+
+```python
+import spacy
+from blackstone.abbreviations import AbbreviationDetector
+
+nlp = spacy.load("en_blackstone_proto")
+
+# Add the abbreviation pipe to the spacy pipeline.
+abbreviation_pipe = AbbreviationDetector(nlp)
+nlp.add_pipe(abbreviation_pipe)
+
+doc = nlp('The European Court of Human Rights ("ECtHR") is the court ultimately responsible for applying the European Convention on Human Rights ("ECHR").')
+
+print("Abbreviation", "\t", "Definition")
+for abrv in doc._.abbreviations:
+	print(f"{abrv} \t ({abrv.start}, {abrv.end}) {abrv._.long_form}")
+    
+>>> "ECtHR"          (7, 10) European Court of Human Rights
+>>> "ECHR"   (25, 28) European Convention on Human Rights   
+
+```
 
 
     
