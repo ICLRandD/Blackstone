@@ -73,7 +73,7 @@ def extract_legislation_relations(doc) -> List[Tuple]:
                     provision = set_provision_target(target, subject)
 
                 else:
-                    provision = None
+                    provision = "None"
             relations.append((subject, provision, instrument, target))
         elif instrument.dep_ == "pobj" and instrument.head.dep_ == "prep":
             target = set_legislation_target(instrument)
@@ -95,7 +95,7 @@ def set_legislation_target(instrument: str) -> str:
             time.sleep(0.1)
             url = page.url
         else:
-            url = None
+            url = "None"
     return url
 
 
