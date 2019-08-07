@@ -184,9 +184,9 @@ for sentence in sentences:
 
 In addition to the core model, this proto release of Blackstone comes with three custom components:
 
-* Abbreviation detection - this is *heavily* based on the `AbbreviationDetector()` component in [scispacy] and resolves an abrreviated form to its long form definition, e.g. HRA 1998 -> Human Rights Act 1998.
+* Abbreviation detection - this is *heavily* based on the `AbbreviationDetector()` component in [scispacy] and resolves an abrreviated form to its long form definition, e.g. `HRA 1998` -> `Human Rights Act 1998`.
 * Legislation linker - this is an alpha component that attempts to resolve references to provisons to their parent instrument (more on this further down the README).
-* Compound case reference detection - again, this is an alpha component that attempts identify CASENAME and CITATION pairs enabling the merging of a CITATIONS to their parent CASENAME.
+* Compound case reference detection - again, this is an alpha component that attempts identify `CASENAME` and `CITATION` pairs enabling the merging of a `CITATION` to its parent `CASENAME`.
 
 
     
