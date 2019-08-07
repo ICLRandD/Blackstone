@@ -2,7 +2,7 @@
 <img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/blackstone_seal.svg" height=75%>
 
 # Blackstone
-Blackstone is a [spaCy](https://spacy.io/) model and library for processing long-form, unstructured legal text. Blackstone is an experimental research project in the [Incorporated Council of Law Reporting for England and Wales'](https://iclr.co.uk/) research lab, [ICLR&D](https://research.iclr.co.uk/).
+Blackstone is a [spaCy](https://spacy.io/) model and library for processing long-form, unstructured legal text. Blackstone is an experimental research project from the [Incorporated Council of Law Reporting for England and Wales'](https://iclr.co.uk/) research lab, [ICLR&D](https://research.iclr.co.uk/).
 
 ## Why are we building Blackstone?
 
@@ -10,24 +10,26 @@ The past several years have seen a surge in activity at the intersection of law 
 
 Moreover, the majoritry of research in the UK legal-informatics domain (whether open or closed) has focussed on the development of NLP applications for automating contracts and other legal documents that are transactional in nature. This is understandable, because the principal benefactors of legal NLP research in the UK are law firms and law firms tend not to find it difficult to get their hands on transactional documentation that can be harnessed as training data. 
 
-The problem, as we see it, is that legal NLP research in the UK has become over concentrated in commercial applications and that it is worthwhile making the investment in developing legal NLP research available with respect to other legal texts, such as judgments, scholarly articles, skeleton arguments and pleadings. 
+The problem, as we see it, is that legal NLP research in the UK has become over concentrated on commercial applications and that it is worthwhile making the investment in developing legal NLP research available with respect to other legal texts, such as judgments, scholarly articles, skeleton arguments and pleadings. 
 
 ## What's special about Blackstone?
 
 * So far as we are aware, Blackstone is the first open source model trained for use on long-form texts containing common law entities and concepts.
 * Blackstone is built on [spaCy](https://spacy.io/), which makes it easy to pick up and apply to your own data.
 * It is free and open source
+* It is imperfect and makes no attempt to hide that fact from you
 
 ## Observations and other things worth noting:
 
 * Perfection is the enemy of the good. This is a prototype release of highly experimental project. As such, the accuracy of Blackstone's models leaves something to be desired (F1 on the NER is approx 70%). The accuracy of these models will improve over time. 
 * The models have been trained on English case law and the library has been built with the peculiarities of legal system of England and Wales in mind. That said, the model is has generalised well and should do a reasonably good job on Australasian, Canadian and American content, too.
-* The data used to train Blackstone's models was derived from the [Incorporated Council of Law Reporting for England and Wales'](https://iclr.co.uk/) archive of case reports and unreported judgments. That archive is proprietary and this prevents us from releasing any of the data used to train Blackstone.  
+* The data used to train Blackstone's models was derived from the [Incorporated Council of Law Reporting for England and Wales'](https://iclr.co.uk/) archive of case reports and unreported judgments. That archive is proprietary and this prevents us from releasing any of the data used to train Blackstone. 
+* Blackston is not a judge or litigation analytics tool.
 
 
 ## Installation
 
-**Note!** It is strongly recommended that you install Blackstone into a virtual environment! See [here](https://realpython.com/python-virtual-environments-a-primer/) for more on virtual environments.
+**Note!** It is strongly recommended that you install Blackstone into a virtual environment! See [here](https://realpython.com/python-virtual-environments-a-primer/) for more on virtual environments. Blackstone should compatible with Python 3.6 and higher.
 
 To install Blackstone follow these steps:
 
@@ -39,7 +41,7 @@ The first step is to install the library, which at present contains a handful of
 pip install blackstone
 ```
 
-### 2. Install the model
+### 2. Install the Blackstone model
 
 The second step is to install the [spaCy](https://spacy.io/) model. Install the model like so:
 
@@ -48,9 +50,9 @@ pip install https://blackstone-model.s3-eu-west-1.amazonaws.com/en_blackstone_pr
 ```
 ## About the model
 
-This is the very first release of Blackstone and the model is best viewed as a *prototype*; it is rough around the edges and represents first step in a large and ongoing programme of open source research into NLP on legal texts. With that out of the way, here's a brief rundown of what's happening in the proto model.
+This is the very first release of Blackstone and the model is best viewed as a *prototype*; it is rough around the edges and represents the first step in a larger ongoing programme of open source research into NLP on legal texts being carried out by ICLR&D. 
 
-Blackstone is a [spaCy](https://spacy.io/) model and pipeline, which means you can apply the model to your own text data using [spaCy's](https://spacy.io/) APIs. 
+With that out of the way, here's a brief rundown of what's happening in the proto model.
 
 ### The pipeline
 
@@ -58,7 +60,7 @@ The proto model included in this release has the following elements in its pipel
 
 <img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/Blackstone/blackstone_pipeline.svg">
 
-Owing to a complete dearth of labelled part-of-speech and dependency training data for legal text, the `tokenizer`, `tagger` and `parser` pipeline components have been taken from [spaCy's](https://spacy.io/) `en_core_web_sm` model. By and large, these components appear to a do a decent job, but it would be good to revisit these components with custom training data at some point in the future. 
+Owing to a scarcity of labelled part-of-speech and dependency training data for legal text, the `tokenizer`, `tagger` and `parser` pipeline components have been taken from [spaCy's](https://spacy.io/) `en_core_web_sm` model. By and large, these components appear to a do a decent job, but it would be good to revisit these components with custom training data at some point in the future. 
 
 The `ner` and `textcat` components are custom components trained especially for Blackstone. 
 
@@ -77,7 +79,7 @@ The NER component of the Blackstone model has been trained to detect the followi
 
 ### Text Categoriser
 
-This release of Blackstone also comes with a text categoriser. In contrast with the NER component (which has been trainined to identify tokens and series of tokens of interest), other text categoriser classifier longer spans of text, such as sentences. 
+This release of Blackstone also comes with a text categoriser. In contrast with the NER component (which has been trainined to identify tokens and series of tokens of interest), the text categoriser classifies longer spans of text, such as sentences. 
 
 The Text Categoriser has been trained to classify text according to one of five mutually exclusive categories, which are as follows:
 
@@ -123,7 +125,7 @@ for ent in doc.ents:
 ```
 #### Visualising entities
 
-[spaCy](https://spacy.io/)ships with an excellent set of visualisers, including a visualiser for NER predicts. Blackstone comes with a custom colour palette that can be used to make it easier to distiguish entities on the source text. 
+[spaCy](https://spacy.io/) ships with an excellent set of visualisers, including a visualiser for NER predicts. Blackstone comes with a custom colour palette that can be used to make it easier to distiguish entities on the source text when using displacy. 
 
 ```python
 """
