@@ -25,7 +25,7 @@ The problem, as we see it, is that legal NLP research in the UK has become over 
 * Perfection is the enemy of the good. This is a prototype release of highly experimental project. As such, the accuracy of Blackstone's models leaves something to be desired (F1 on the NER is approx 70%). The accuracy of these models will improve over time. 
 * The models have been trained on English case law and the library has been built with the peculiarities of legal system of England and Wales in mind. That said, the model is has generalised well and should do a reasonably good job on Australasian, Canadian and American content, too.
 * The data used to train Blackstone's models was derived from the [Incorporated Council of Law Reporting for England and Wales'](https://iclr.co.uk/) archive of case reports and unreported judgments. That archive is proprietary and this prevents us from releasing any of the data used to train Blackstone. 
-* Blackston is not a judge or litigation analytics tool.
+* Blackstone is not a judge or litigation analytics tool.
 
 
 ## Installation
