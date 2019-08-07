@@ -79,8 +79,13 @@ def extract_legislation_relations(doc) -> List[Tuple]:
         elif instrument.dep_ == "pobj" and instrument.head.dep_ == "prep":
             target = set_legislation_target(instrument)
             if target:
-                provision = set_provision_target(target, instrument.head.head)
-            relations.append((instrument.head.head, provision, instrument, target))
+                if hasNumbers(str(instrument.head.head)):
+                    provision = set_provision_target(target, instrument.head.head)
+                    head = instrument.head.head
+                else:
+                    provision = "None"
+                    head = "None"
+            relations.append((head, provision, instrument, target))
     return relations
 
 
@@ -89,7 +94,9 @@ def set_legislation_target(instrument: str) -> str:
     Returns the legislation.gov.uk for the identified instrument, 
     e.g. http://www.legislation.gov.uk/ukpga/1999/17/contents. 
     """
-    if "Act" in instrument.text:
+    if "Act" not in instrument.text:
+        target_url = "None"
+    elif "Act" in instrument.text:
         url = f"http://www.legislation.gov.uk/id?title={instrument.text}"
         page = requests.get(url)
         if page.status_code == 200:
@@ -112,5 +119,10 @@ def set_provision_target(url: str, subject: str) -> str:
     url = url.replace("contents", "section/")
     provision_number = re.findall(r"\d+", str(subject))
     matches = [match for match in provision_number]
-    url = url + str(matches[0])
+    if matches:
+        url = url + str(matches[0])
+    else:
+        url = "None"
     return url
+
+nlp = spacy.load("en_blackstone_proto")
