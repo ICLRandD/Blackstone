@@ -23,7 +23,7 @@ setup(
     url = 'https://research.iclr.co.uk/blackstone',
     author = 'ICLR&D (Incorporated Council of Law Reporting Research Lab)',
     author_email = 'research@iclr.co.uk',
-    description = 'A SpaCy pipeline and models for long-from legal text.',
+    description = 'A SpaCy pipeline and models for NLP on unstructured legal text.',
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     keywords = ["law caselaw lawtech legaltech nlp spacy SpaCy biomedical"],
