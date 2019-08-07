@@ -180,7 +180,13 @@ for sentence in sentences:
 >>> "The question is whether on the facts found by the judge, the (or a) proximate cause of the loss of the rig was “inherent vice or nature of the subject matter insured” within the meaning of clause 4.4 of the Institute Cargo Clauses (A)." ('ISSUE', 0.5040785074234009)
 ```
 
+## Custom pipeline extensions
 
+In addition to the core model, this proto release of Blackstone comes with three custom components:
+
+* Abbreviation detection - this is *heavily* based on the `AbbreviationDetector()` component in [scispacy] and resolves an abrreviated form to its long form definition, e.g. HRA 1998 -> Human Rights Act 1998.
+* Legislation linker - this is an alpha component that attempts to resolve references to provisons to their parent instrument (more on this further down the README).
+* Compound case reference detection - again, this is an alpha component that attempts identify CASENAME and CITATION pairs enabling the merging of a CITATIONS to their parent CASENAME.
 
 
     
