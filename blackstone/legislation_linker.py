@@ -124,5 +124,3 @@ def set_provision_target(url: str, subject: str) -> str:
     else:
         url = "None"
     return url
-
-nlp = spacy.load("en_blackstone_proto")
