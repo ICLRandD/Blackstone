@@ -217,6 +217,40 @@ for abrv in doc._.abbreviations:
 
 ```
 
+### Compound case reference detection
+
+The compound case reference detection component in Blackstone is designed to marry up `CITATION` entities with their parent `CASENAME` entities. 
+
+Common law jurisdictions typically relate to case references through a coupling of a name (that is typically derived from the names of the parties in the case) and some unique citation to identify where the case has been reported, like so:
+
+> Regina v Horncastle \[2010] 2 AC 373
+
+Blackstone's NER model separately attempts to identify the `CASENAME` and `CITATION` components. However, it is potentially useful (particularly in the context of information extraction) to pull these out as pairs. 
+
+`CompoundCases()` applies a custom pipe to after the NER and identifies `CASENAME`/`CITATION` pairs in two scenarios:
+
+* The standard scenario: Gelmini v Moriggia \[1913] 2 KB 549
+* The possessive scenario (which is a little antiquated): Jone's case \[1915] 1 KB 45
+
+```python
+import spacy
+from blackstone.compound_cases import CompoundCases
+
+nlp = spacy.load("en_blackstone_proto")
+
+compound_pipe = CompoundCases(nlp)
+nlp.add_pipe(compound_pipe)
+
+text = "As I have indicated, this was the central issue before the judge. On this issue the defendants relied (successfully below) on the decision of the High Court in Gelmini v Moriggia [1913] 2 KB 549. In Jone's case [1915] 1 KB 45, the defendant wore a hat."
+doc = nlp(text)
+
+for compound_ref in doc._.compound_cases:
+    print(compound_ref)
+    
+>>> Gelmini v Moriggia [1913] 2 KB 549
+>>> Jone's case [1915] 1 KB 45
+```
+
 
     
     
