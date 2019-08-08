@@ -1,8 +1,7 @@
-[![Built with spaCy](https://img.shields.io/badge/made%20with%20❤%20and-spaCy-09a3d5.svg)](https://spacy.io)
 <img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/sitecode.svg" width=20%>
 <img src="https://iclr.s3-eu-west-1.amazonaws.com/assets/iclrand/blackstone_seal.svg" height=75%>
 
-# Blackstone
+# Blackstone [![Built with spaCy](https://img.shields.io/badge/made%20with%20❤%20and-spaCy-09a3d5.svg)](https://spacy.io)
 Blackstone is a [spaCy](https://spacy.io/) model and library for processing long-form, unstructured legal text. Blackstone is an experimental research project from the [Incorporated Council of Law Reporting for England and Wales'](https://iclr.co.uk/) research lab, [ICLR&D](https://research.iclr.co.uk/).
 
 ## Why are we building Blackstone?
