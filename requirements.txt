@@ -1,0 +1,3 @@
+blackstone==0.1.8
+spacy==2.1.7
+https://blackstone-model.s3-eu-west-1.amazonaws.com/en_blackstone_proto-0.0.1.tar.gz
