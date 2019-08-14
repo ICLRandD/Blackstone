@@ -121,9 +121,6 @@ def main(model=None, output_dir=None, n_iter=20):
             doc = nlp2(text)
             print('Entities', [(ent.text, ent.label_) for ent in doc.ents])
             print('Tokens', [(t.text, t.ent_type_, t.ent_iob) for t in doc])
-        with open('/Users/danielhoadley/blackstone/training.losses.txt', 'a+') as losses_out:
-            for loss in LOSS_COUNTER:
-                losses_out.write(str(loss))
 
 if __name__ == '__main__':
     plac.call(main)
