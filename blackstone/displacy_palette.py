@@ -5,11 +5,19 @@ ner_displacy_palette = {
     "COURT": "#fcd548",
     "PROVISION": "#007bac",
     "INSTRUMENT": "#6c63a5",
-    "CONCEPT": "#df5a35"
+    "CONCEPT": "#df5a35",
 }
 
 ner_displacy_options = {
-    "ents": ["CASENAME", "CITATION", "JUDGE", "COURT", "PROVISION", "INSTRUMENT", "CONCEPT"],
+    "ents": [
+        "CASENAME",
+        "CITATION",
+        "JUDGE",
+        "COURT",
+        "PROVISION",
+        "INSTRUMENT",
+        "CONCEPT",
+    ],
     "colors": ner_displacy_palette,
 }
 

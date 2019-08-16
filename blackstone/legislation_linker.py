@@ -105,7 +105,7 @@ def set_legislation_target(instrument: str) -> str:
             target_url = page.url
         else:
             target_url = "None"
-    
+
     url_targert = target_url
 
     return url_targert
