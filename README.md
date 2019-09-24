@@ -296,6 +296,29 @@ for provision, provision_url, instrument, instrument_url in relations:
 >>> section 1       http://www.legislation.gov.uk/ukpga/1968/60/section/1   Theft Act 1968  http://www.legislation.gov.uk/ukpga/1968/60/contents
 ```
 
+### Sentence segmenter
+
+Blackstone ships with a custom rule-based sentence segmenter that addresses a range of characteristics inherent in legal texts that have a tendency to baffle out-of-the-box sentence segmentation rules.
+
+```python
+import spacy
+from blackstone.segmenter import sentence_segmenter
+
+nlp = spacy.load("en_blackstone_proto")
+
+# remove the default spaCy sentencizer from the model pipeline
+if "sentencizer" in nlp.pipe_names:
+    nlp.remove_pipe('sentencizer')
+
+# add the Blackstone sentence_segmenter to the pipeline before the parser
+nlp.add_pipe(sentence_segmenter, before="parser")
+
+doc = nlp("Some more legal text goes here. And a little bit more legal text goes here")
+
+for sent in doc.sents:
+    print (sent.text)
+```
+
 ## Thanks
 
 We would like to thank the following people/organisations who have helped us (directly or indirectly) to build this prototype.
