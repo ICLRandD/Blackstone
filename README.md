@@ -4,6 +4,48 @@
 # Blackstone [![Built with spaCy](https://img.shields.io/badge/made%20with%20❤%20and-spaCy-09a3d5.svg)](https://spacy.io)
 Blackstone is a [spaCy](https://spacy.io/) model and library for processing long-form, unstructured legal text. Blackstone is an experimental research project from the [Incorporated Council of Law Reporting for England and Wales'](https://iclr.co.uk/) research lab, [ICLR&D](https://research.iclr.co.uk/).
 
+## Contents
+
+[**Why are we building Blackstone?**](https://github.com/ICLRandD/Blackstone#why-are-we-building-blackstone)
+
+[**What's special about Blackstone?**](https://github.com/ICLRandD/Blackstone#whats-special-about-blackstone)
+
+[**Observations and other things worth noting**](https://github.com/ICLRandD/Blackstone#observations-and-other-things-worth-noting)
+
+[**Installation**](https://github.com/ICLRandD/Blackstone#installation)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[Install the library](https://github.com/ICLRandD/Blackstone#1-install-the-library)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[Install the Blackstone model](https://github.com/ICLRandD/Blackstone#2-install-the-blackstone-model)
+
+[**About the model**](https://github.com/ICLRandD/Blackstone#about-the-model)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[The pipeline](https://github.com/ICLRandD/Blackstone#the-pipeline)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[Named-Entity Recogniser](https://github.com/ICLRandD/Blackstone#named-entity-recogniser)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[Text categoriser](https://github.com/ICLRandD/Blackstone#text-categoriser)
+
+[**Usage**](https://github.com/ICLRandD/Blackstone#usage)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[Applying the NER model](https://github.com/ICLRandD/Blackstone#applying-the-ner-model)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Visualising entities](https://github.com/ICLRandD/Blackstone#visualising-entities)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[Applying the text categoriser model](https://github.com/ICLRandD/Blackstone#applying-the-text-categoriser-model)
+
+[**Custom pipeline extensions**](https://github.com/ICLRandD/Blackstone#custom-pipeline-extensions)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[Abbreviation and long-form definition resolution](https://github.com/ICLRandD/Blackstone#abbreviation-detection-and-long-form-definition-resolution)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[Compound case reference detections](https://github.com/ICLRandD/Blackstone#compound-case-reference-detection)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[Legislation linker](https://github.com/ICLRandD/Blackstone#legislation-linker)
+
+&nbsp;&nbsp;&nbsp;&nbsp;[Sentence segmenter](https://github.com/ICLRandD/Blackstone#sentence-segmenter)
+
+
+
 ## Why are we building Blackstone?
 
 The past several years have seen a surge in activity at the intersection of law and technology. However, in the United Kingdom, the overwhelming bulk of that activity has taken place in law firms and other commercial contexts. The consequence of this is that notwithstanding the never ending flurry of development in the legal-informatics space, almost none of the research is made available on an open-source basis. 
