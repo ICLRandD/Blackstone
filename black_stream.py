@@ -105,15 +105,17 @@ vector_size = nlp.meta.get("vectors", {}).get("width", 0)
 if vector_size:
     st.header("Vectors & Similarity")
     st.code(nlp.meta["vectors"])
-    text1 = st.text_input("Text or word 1", "apple")
-    text2 = st.text_input("Text or word 2", "orange")
+    text1 = st.text_input("Text or word 1", "libel")
+    text2 = st.text_input("Text or word 2", "slander")
     doc1 = process_text(spacy_model, text1)
     doc2 = process_text(spacy_model, text2)
     similarity = doc1.similarity(doc2)
     if similarity > 0.5:
         st.success(similarity)
+        st.markdown("The terms are semantically similar.")
     else:
         st.error(similarity)
+        st.markdown("The terms are *not* semantically similar.")
 
 st.header("Token attributes")
 
