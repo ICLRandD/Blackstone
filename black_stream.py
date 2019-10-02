@@ -21,8 +21,8 @@ from spacy import displacy
 import pandas as pd
 
 
-SPACY_MODEL_NAMES = ["en_core_web_sm", "en_core_web_md", "de_core_news_sm", "en_blackstone_proto"]
-DEFAULT_TEXT = "Mark Zuckerberg is the CEO of Facebook."
+SPACY_MODEL_NAMES = ["en_blackstone_proto"]
+DEFAULT_TEXT = """The appellant originally submitted in writing that the UT erred in failing to adopt the structured approach to article 14 of the ECHR set out in Wandsworth London Borough Council v Michalak [2003] 1 WLR 617. Specifically, it was submitted that the UT erred in not identifying the correct comparator before proceeding to the question of objective justification. In oral submissions the argument from Michalak’s case was not pursued and it was acknowledged that later case law, which I need only summarise, has moved away from an overly structured approach."""
 HTML_WRAPPER = """<div style="overflow-x: auto; border: 1px solid #e6e9ef; border-radius: 0.25rem; padding: 1rem; margin-bottom: 2.5rem">{}</div>"""
 
 
@@ -37,12 +37,10 @@ def process_text(model_name, text):
     return nlp(text)
 
 
-st.sidebar.title("Interactive spaCy visualizer")
+st.sidebar.title("Blackstone Visualiser")
 st.sidebar.markdown(
     """
-Process text with [spaCy](https://spacy.io) models and visualize named entities,
-dependencies and more. Uses spaCy's built-in
-[displaCy](http://spacy.io/usage/visualizers) visualizer under the hood.
+Experimental visualisation tool for the Blackstone NLP model.
 """
 )
 
