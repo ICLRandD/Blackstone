@@ -4,7 +4,7 @@ from spacy import displacy
 import pandas as pd
 
 
-SPACY_MODEL_NAMES = ["blackstone"]
+SPACY_MODEL_NAMES = ["en_blackstone_proto"]
 DEFAULT_TEXT = "Mark Zuckerberg is the CEO of Facebook."
 HTML_WRAPPER = """<div style="overflow-x: auto; border: 1px solid #e6e9ef; border-radius: 0.25rem; padding: 1rem; margin-bottom: 2.5rem">{}</div>"""
 
