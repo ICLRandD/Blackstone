@@ -14,7 +14,7 @@ HTML_WRAPPER = """<div style="overflow-x: auto; border: 1px solid #e6e9ef; borde
 
 @st.cache(ignore_hash=True)
 def process_text(model_name, text):
-    nlp = spacy.load('/Users/Daniel/Documents/Development/blackstone_stream/black_stream/lib/python3.6/site-packages/en_blackstone_proto/en_blackstone_proto-0.0.1')
+    nlp = spacy.load('en_blackstone_proto')
     print ("model loaded!")
     return nlp(text)
 
@@ -30,7 +30,7 @@ dependencies and more. Uses spaCy's built-in
 
 
 model_load_state = st.info(f"Loading model '{spacy_model}'...")
-nlp = spacy.load('/Users/Daniel/Documents/Development/blackstone_stream/black_stream/lib/python3.6/site-packages/en_blackstone_proto/en_blackstone_proto-0.0.1')
+nlp = spacy.load('en_blackstone_proto')
 model_load_state.empty()
 
 text = st.text_area("Text to analyze", DEFAULT_TEXT)
