@@ -3,7 +3,7 @@ from spacy.pipeline import EntityRuler
 from spacy.matcher import Matcher
 from spacy.tokens import Doc
 from collections import Counter
-from blackstone.rules.concept_rules import CONCEPT_PATTERNS
+from ..rules.concept_rules import CONCEPT_PATTERNS
 
 
 class Concepts:

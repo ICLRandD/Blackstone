@@ -323,7 +323,7 @@ Once Blackstone has identified a `PROVISION`:`CASENAME` pair, it will attempt to
 
 ```python
 import spacy
-from blackstone.legislation_linker import extract_legislation_relations
+from blackstone.utils.legislation_linker import extract_legislation_relations
 nlp = spacy.load("en_blackstone_proto")
 
 text = "The Secretary of State was at pains to emphasise that, if a withdrawal agreement is made, it is very likely to be a treaty requiring ratification and as such would have to be submitted for review by Parliament, acting separately, under the negative resolution procedure set out in section 20 of the Constitutional Reform and Governance Act 2010. Theft is defined in section 1 of the Theft Act 1968"
@@ -342,9 +342,12 @@ for provision, provision_url, instrument, instrument_url in relations:
 
 Blackstone ships with a custom rule-based sentence segmenter that addresses a range of characteristics inherent in legal texts that have a tendency to baffle out-of-the-box sentence segmentation rules.
 
+This behaviour can be extended by optionally passing a list of spaCy-style Matcher patterns that will explicitly prevent sentence boundary detection inside matches.
+
 ```python
 import spacy
-from blackstone.segmenter import sentence_segmenter
+from blackstone.pipeline.sentence_segmenter import SentenceSegmenter
+from blackstone.rules import CITATION_PATTERNS
 
 nlp = spacy.load("en_blackstone_proto")
 
@@ -353,9 +356,14 @@ if "sentencizer" in nlp.pipe_names:
     nlp.remove_pipe('sentencizer')
 
 # add the Blackstone sentence_segmenter to the pipeline before the parser
+sentence_segmenter = SentenceSegmenter(nlp.vocab, CITATION_PATTERNS)
 nlp.add_pipe(sentence_segmenter, before="parser")
 
-doc = nlp("Some more legal text goes here. And a little bit more legal text goes here")
+doc = nlp(
+    """
+    The courts in this jurisdiction will enforce those commitments when it is legally possible and necessary to do so (see, most recently, R. (on the application of ClientEarth) v Secretary of State for the Environment, Food and Rural Affairs (No.2) [2017] P.T.S.R. 203 and R. (on the application of ClientEarth) v Secretary of State for Environment, Food and Rural Affairs (No.3) [2018] Env. L.R. 21). The central question in this case arises against that background.
+    """
+)
 
 for sent in doc.sents:
     print (sent.text)
