@@ -262,7 +262,7 @@ The abbreviation detection component in Blackstone seeks to address this by impl
 
 ```python
 import spacy
-from blackstone.abbreviations import AbbreviationDetector
+from blackstone.pipeline.abbreviations import AbbreviationDetector
 
 nlp = spacy.load("en_blackstone_proto")
 
@@ -298,7 +298,7 @@ Blackstone's NER model separately attempts to identify the `CASENAME` and `CITAT
 
 ```python
 import spacy
-from blackstone.compound_cases import CompoundCases
+from blackstone.pipeline.compound_cases import CompoundCases
 
 nlp = spacy.load("en_blackstone_proto")
 
