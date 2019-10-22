@@ -13,7 +13,7 @@ from blackstone.pipeline.abbreviations import (
 class TestAbbreviationDetector(unittest.TestCase):
     def setUp(self):
         super().setUp()
-        self.nlp = spacy.load("en_core_web_sm")
+        self.nlp = spacy.load("en_blackstone_proto")
         self.detector = AbbreviationDetector(self.nlp)
         self.text = "The European Court of Human Rights (ECtHR) is \
             responsible for applying the European Convention of Human \
