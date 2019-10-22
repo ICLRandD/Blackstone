@@ -351,10 +351,6 @@ from blackstone.rules import CITATION_PATTERNS
 
 nlp = spacy.load("en_blackstone_proto")
 
-# remove the default spaCy sentencizer from the model pipeline
-if "sentencizer" in nlp.pipe_names:
-    nlp.remove_pipe('sentencizer')
-
 # add the Blackstone sentence_segmenter to the pipeline before the parser
 sentence_segmenter = SentenceSegmenter(nlp.vocab, CITATION_PATTERNS)
 nlp.add_pipe(sentence_segmenter, before="parser")
