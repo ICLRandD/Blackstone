@@ -1,11 +1,5 @@
 from spacy.matcher import Matcher
 
-"""TODO:
-Add rulesfor:
-    - (1 & 2 Vict. c. 100) breaks on Vict.
-    - Art. c) 
-    - weird breaks going on with commas, e.g. confirmed by 1 & 2 Geo. 5, c. clxxxv.), 
-
 class SentenceSegmenter(object):
     """Adds custom sentence boundaries to spaCy Doc. 
     @param vocab: the language vocabulary from the spaCy nlp object
