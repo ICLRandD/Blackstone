@@ -2,11 +2,11 @@
 import unittest
 import spacy
 
-from blackstone.abbreviations import (
+from blackstone.pipeline.abbreviations import (
     AbbreviationDetector,
     find_abbreviation,
     filter_matches,
-    containsQuotes,
+    containsQuotes
 )
 
 
