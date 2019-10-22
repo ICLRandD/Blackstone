@@ -8,7 +8,7 @@ from blackstone.rules.citation_rules import CITATION_PATTERNS
 class TestSentenceSegmenter(unittest.TestCase):
     def setUp(self):
         super().setUp()
-        self.nlp = spacy.load("en_core_web_sm")
+        self.nlp = spacy.load("en_blackstone_proto")
         self.sentence_segmenter = SentenceSegmenter(self.nlp.vocab, CITATION_PATTERNS)
         self.nlp.add_pipe(self.sentence_segmenter, before="parser")
 
