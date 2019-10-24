@@ -319,7 +319,7 @@ for compound_ref in doc._.compound_cases:
 
 Blackstone's Legislation Linker attempts to couple a reference to a `PROVISION` to it's parent `INSTRUMENT` by using the NER model to identify the presence of an `INSTRUMENT` and then navigating the dependency tree to identify the child provision. 
 
-Once Blackstone has identified a `PROVISION`:`CASENAME` pair, it will attempt to generate target URLs to both the provision and the instrument on [legislation.gov.uk](https://legislation.gov.uk).
+Once Blackstone has identified a `PROVISION`:`INSTRUMENT` pair, it will attempt to generate target URLs to both the provision and the instrument on [legislation.gov.uk](https://legislation.gov.uk).
 
 ```python
 import spacy
