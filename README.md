@@ -89,7 +89,7 @@ pip install blackstone
 The second step is to install the [spaCy](https://spacy.io/) model. Install the model like so:
 
 ```
-pip install https://blackstone-model.s3-eu-west-1.amazonaws.com/en_blackstone_proto-0.0.1.tar.gz
+pip install https://blackstone-model.s3-eu-west-1.amazonaws.com/en_blackstone_proto-0.0.2.tar.gz
 ```
 ## About the model
 
