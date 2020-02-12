@@ -17,14 +17,15 @@ for text in TEXTS:
 
 """
 from typing import List, Tuple
+from spacy.tokens.span import Span
+from spacy.tokens.token import Token
 import re
 import requests
 import time
 
-
-def filter_spans(spans) -> List[str]:
+def filter_spans(spans) -> List[Span]:
     """
-    Filter out overlapping spans. Returns a list of strings.
+    Filter out overlapping spans. Returns a list of Spans.
     """
     get_sort_key = lambda span: (span.end - span.start, span.start)
     sorted_spans = sorted(spans, key=get_sort_key, reverse=True)
@@ -66,7 +67,7 @@ def extract_legislation_relations(doc) -> List[Tuple]:
             subject = [w for w in instrument.head.lefts if w.dep_ == "nsubj"]
             if subject:
                 subject = subject[0]
-                if hasNumbers(subject):
+                if hasNumbers(str(subject)):
                     # Get the URL for the instrument on legislation.gov.uk
                     target = set_legislation_target(instrument)
                     # Get the URL for the provision
@@ -74,7 +75,9 @@ def extract_legislation_relations(doc) -> List[Tuple]:
                         provision = set_provision_target(target, subject)
 
                 else:
+                    subject="None"
                     provision = "None"
+                    target = set_legislation_target(instrument)
             relations.append((subject, provision, instrument, target))
         elif instrument.dep_ == "pobj" and instrument.head.dep_ == "prep":
             target = set_legislation_target(instrument)
@@ -89,10 +92,15 @@ def extract_legislation_relations(doc) -> List[Tuple]:
     return relations
 
 
-def set_legislation_target(instrument: str) -> str:
+def set_legislation_target(instrument: Token) -> str:
     """
     Returns the legislation.gov.uk for the identified instrument, 
-    e.g. http://www.legislation.gov.uk/ukpga/1999/17/contents. 
+    e.g. http://www.legislation.gov.uk/ukpga/1999/17/contents.
+
+    The legislation.gov API takes care of resolving requests for instruments (by title) with
+    that instrument's URL. i.e. a request to
+    http://www.legislation.gov.uk/id?title=Constitutional Reform and Governance Act 2010
+    resolves to http://www.legislation.gov.uk/ukpga/2010/25/contents
     """
     if "Act" not in instrument.text:
         target_url = "None"
@@ -111,7 +119,7 @@ def set_legislation_target(instrument: str) -> str:
     return url_targert
 
 
-def set_provision_target(url: str, subject: str) -> str:
+def set_provision_target(url: str, subject: Token) -> str:
     """
     Returns the legislation.gov.uk URL for the identified provision, 
     e.g. http://www.legislation.gov.uk/ukpga/1998/42/section/20.
