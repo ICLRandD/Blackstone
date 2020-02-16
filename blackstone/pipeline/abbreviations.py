@@ -102,29 +102,37 @@ def filter_matches(
     # 2. <Long Form> (<Short Form>) [this case is most common].
     candidates = []
     for match in matcher_output:
+
+        QUOTES = ['"', "'", "‘", "’", "“", "”"]
+
         start = match[1]
         end = match[2]
+        quote_offset = 0
+
+        # Adjust indexes where match is enclosed in quotation marks.
+        if containsQuotes(doc[start:end].text, QUOTES):
+            start = match[1] + 1
+            end = match[2] - 1
+            quote_offset = 1
+
         # Ignore spans with more than 8 words in.
         if end - start > 8:
             continue
         if end - start > 3:
             # Long form is inside the parens.
             # Take two words before.
-            short_form_candidate = doc[start - 3 : start - 1]
+            short_form_candidate = doc[start - 3 - quote_offset: start - 1 - quote_offset]
             if short_form_filter(short_form_candidate):
                 candidates.append((doc[start:end], short_form_candidate))
         else:
             # Normal case.
             # Short form is inside the parens.
             # Sum character lengths of contents of parens.
-            QUOTES = ['"', "'", "‘", "’", "“", "”"]
-            if containsQuotes(doc.text, QUOTES):
-                abbreviation_length = sum([len(x) for x in doc[start:end]]) - 2
-            else:
-                abbreviation_length = sum([len(x) for x in doc[start:end]])
+
+            abbreviation_length = sum([len(x) for x in doc[start:end]])
             max_words = min(abbreviation_length + 5, abbreviation_length * 2)
             # Look up to max_words backwards
-            long_form_candidate = doc[max(start - max_words - 1, 0) : start - 1]
+            long_form_candidate = doc[max(start - max_words - 1 - quote_offset, 0) : start - 1 - quote_offset]
             candidates.append((long_form_candidate, doc[start:end]))
     return candidates
 

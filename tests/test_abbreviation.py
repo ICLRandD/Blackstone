@@ -97,6 +97,23 @@ class TestAbbreviationDetector(unittest.TestCase):
         _, long_form = find_abbreviation(long, short)
         assert long_form.text == "aaaabbreviation"
 
+    def test_filter_matches(self):
+        # Act and year separated with a space
+        doc = self.nlp("Companies Act 2006 (CA 2006)")
+        filtered = filter_matches([(1, 4, 6)], doc)
+        long_form_candidate = filtered[0][0]
+        short_form_candidate = filtered[0][1]
+        assert long_form_candidate.text == "Companies Act 2006"
+        assert short_form_candidate.text == "CA 2006"
+
+        # Act and year separated with a space, with quote marks
+        doc = self.nlp("Companies Act 2006 ('CA 2006')")
+        filtered = filter_matches([(1, 4, 8)], doc)
+        long_form_candidate = filtered[0][0]
+        short_form_candidate = filtered[0][1]
+        assert long_form_candidate.text == "Companies Act 2006"
+        assert short_form_candidate.text == "CA 2006"
+
     def test_find(self):
         doc = self.nlp(self.text)
         long, shorts = self.detector.find(doc[1:6], doc)
