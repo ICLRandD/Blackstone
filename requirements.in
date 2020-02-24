@@ -10,5 +10,8 @@ requests
 pytest
 pytest-cov
 
+# code formatting
+black
+
 # Required for releases.
 twine
