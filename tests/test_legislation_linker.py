@@ -1,4 +1,4 @@
-# pylint: disable=no-self-use,invalid-name
+# flake8: noqa
 import unittest
 import spacy
 
