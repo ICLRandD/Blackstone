@@ -15,10 +15,6 @@ per-file-ignores =
     */__init__.py:F401
     */**/**/__init__.py:F401,E501
 
-    # tests don't have to respect
-    #  E731: do not assign a lambda expression, use a def
-    allennlp/tests/**:E731
-
     # scripts don't have to respect
     #  E402: imports not at top of file
     scripts/**:E402
