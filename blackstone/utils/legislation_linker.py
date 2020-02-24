@@ -23,6 +23,7 @@ import re
 import requests
 import time
 
+
 def filter_spans(spans) -> List[Span]:
     """
     Filter out overlapping spans. Returns a list of Spans.
@@ -75,7 +76,7 @@ def extract_legislation_relations(doc) -> List[Tuple]:
                         provision = set_provision_target(target, subject)
 
                 else:
-                    subject="None"
+                    subject = "None"
                     provision = "None"
                     target = set_legislation_target(instrument)
             relations.append((subject, provision, instrument, target))
