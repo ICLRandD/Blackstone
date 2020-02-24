@@ -18,5 +18,4 @@ class TestSentenceSegmenter(unittest.TestCase):
         assert self.sum_iterable(doc.sents) == 2
 
     def sum_iterable(self, i):
-        return sum(1 for e in i) 
-        
+        return sum(1 for e in i)

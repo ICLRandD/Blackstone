@@ -6,7 +6,7 @@ from blackstone.utils.legislation_linker import (
     filter_spans,
     set_legislation_target,
     set_provision_target,
-    extract_legislation_relations
+    extract_legislation_relations,
 )
 
 
@@ -20,7 +20,7 @@ class TestLegislationLinker(unittest.TestCase):
         # Entity recognition
         doc = self.nlp(self.text)
         NER_entities = list(doc.ents)
-        instrument = doc[56:62] # Constitutional Reform and Governance Act 2010
+        instrument = doc[56:62]  # Constitutional Reform and Governance Act 2010
         assert instrument in NER_entities
 
         # Include instrument in filtered spans
@@ -48,40 +48,42 @@ class TestLegislationLinker(unittest.TestCase):
         doc = self.nlp("section 20")
         url = "http://www.legislation.gov.uk/ukpga/2010/25/contents"
         target = "http://www.legislation.gov.uk/ukpga/2010/25/section/20"
-        assert set_provision_target(url,doc) == target
+        assert set_provision_target(url, doc) == target
 
         # No number matches
         doc = self.nlp("section")
         url = "http://www.legislation.gov.uk/ukpga/2010/25/contents"
         target = "None"
-        assert set_provision_target(url,doc) == target
+        assert set_provision_target(url, doc) == target
 
     def test_extract_legislation_relations(self):
         # Instrument is the object of a preposition without a provision reference
         text = "The Secretary of State went on to describe the negative resolution procedure set out in the Constitutional Reform and Governance Act 2010."
         doc = self.nlp(text)
         relations = extract_legislation_relations(doc)
-        assert str(relations[0][0]) == 'None'
-        assert relations[0][1] == 'None'
-        assert str(relations[0][2]) == 'Constitutional Reform and Governance Act 2010'
-        assert relations[0][3] == 'http://www.legislation.gov.uk/ukpga/2010/25/contents'
+        assert str(relations[0][0]) == "None"
+        assert relations[0][1] == "None"
+        assert str(relations[0][2]) == "Constitutional Reform and Governance Act 2010"
+        assert relations[0][3] == "http://www.legislation.gov.uk/ukpga/2010/25/contents"
 
         # Instrument is the object of a preposition and includes a provision reference
         text = "The Secretary of State went on to describe the negative resolution procedure set out in section 20 of the Constitutional Reform and Governance Act 2010."
         doc = self.nlp(text)
         relations = extract_legislation_relations(doc)
-        assert str(relations[0][0]) == 'section 20'
-        assert relations[0][1] == 'http://www.legislation.gov.uk/ukpga/2010/25/section/20'
-        assert str(relations[0][2]) == 'Constitutional Reform and Governance Act 2010'
-        assert relations[0][3] == 'http://www.legislation.gov.uk/ukpga/2010/25/contents'
+        assert str(relations[0][0]) == "section 20"
+        assert (
+            relations[0][1] == "http://www.legislation.gov.uk/ukpga/2010/25/section/20"
+        )
+        assert str(relations[0][2]) == "Constitutional Reform and Governance Act 2010"
+        assert relations[0][3] == "http://www.legislation.gov.uk/ukpga/2010/25/contents"
 
         # Instrument is a direct object without a provision reference
-        text = "The procedure follows the Constitutional Reform and Governance Act 2010."
+        text = (
+            "The procedure follows the Constitutional Reform and Governance Act 2010."
+        )
         doc = self.nlp(text)
         relations = extract_legislation_relations(doc)
-        assert str(relations[0][0]) == 'None'
-        assert relations[0][1] == 'None'
-        assert str(relations[0][2]) == 'Constitutional Reform and Governance Act 2010'
-        assert relations[0][3] == 'http://www.legislation.gov.uk/ukpga/2010/25/contents'
-
-
+        assert str(relations[0][0]) == "None"
+        assert relations[0][1] == "None"
+        assert str(relations[0][2]) == "Constitutional Reform and Governance Act 2010"
+        assert relations[0][3] == "http://www.legislation.gov.uk/ukpga/2010/25/contents"

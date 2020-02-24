@@ -6,7 +6,7 @@ from blackstone.pipeline.abbreviations import (
     AbbreviationDetector,
     find_abbreviation,
     filter_matches,
-    containsQuotes
+    containsQuotes,
 )
 
 
@@ -101,4 +101,3 @@ class TestAbbreviationDetector(unittest.TestCase):
         doc = self.nlp(self.text)
         long, shorts = self.detector.find(doc[1:6], doc)
         assert long.string == "European Court of Human Rights "
-        
