@@ -8,7 +8,7 @@ CITATION_PATTERNS = [
             {"LIKE_NUM": True, "OP": "?"},
             {"TEXT": {"REGEX": "^[A-Z]"}, "OP": "?"},
             {"ORTH": ".", "OP": "?"},
-            {"TEXT": {"REGEX": "^[A-Z\.]"}},
+            {"TEXT": {"REGEX": r"^[A-Z\.]"}},
             {"ORTH": ".", "OP": "?"},
             {"LIKE_NUM": True},
         ],

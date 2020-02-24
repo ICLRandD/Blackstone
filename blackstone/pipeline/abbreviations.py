@@ -1,5 +1,5 @@
 """
-A slightly modified version of scispaCy's AbbreviationDetector. The only minor 
+A slightly modified version of scispaCy's AbbreviationDetector. The only minor
 modification has been to handle common instances in legal text in which short form
 abbreviations are bounded by quote marks, like so:
 

@@ -1,6 +1,6 @@
 """
-Detects relationships between provisions and instruments identified by 
-Blackstone's NER model. 
+Detects relationships between provisions and instruments identified by
+Blackstone's NER model.
 
 Example usage:
 
@@ -10,7 +10,7 @@ TEXTS = [
     "Section 1 of the Theft Act 1968 sets out the definition of theft."
 ]
 for text in TEXTS:
-    doc = nlp(text) 
+    doc = nlp(text)
     relations = extract_legislation_relations(doc)
     for provision, provision_url, instrument, instrument_url in relations:
         print(f"\n{provision}\t{provision_url}\t{instrument}\t{instrument_url}")
@@ -28,7 +28,8 @@ def filter_spans(spans) -> List[Span]:
     """
     Filter out overlapping spans. Returns a list of Spans.
     """
-    get_sort_key = lambda span: (span.end - span.start, span.start)
+    def get_sort_key(span: Span):
+        return (span.end - span.start, span.start)
     sorted_spans = sorted(spans, key=get_sort_key, reverse=True)
     result = []
     seen_tokens = set()
@@ -49,9 +50,9 @@ def hasNumbers(inputString: str) -> bool:
 def extract_legislation_relations(doc) -> List[Tuple]:
     """
     Extract relationships between provisions and instruments identified
-    by Blackstone's NER with the assistance of the dependency parser. 
+    by Blackstone's NER with the assistance of the dependency parser.
 
-    This function receives a spaCy doc and returns a list of tuples, each 
+    This function receives a spaCy doc and returns a list of tuples, each
     tuple containing the following elements:
 
     (provision, provision_URL, instrument, instrument_URL)
@@ -95,7 +96,7 @@ def extract_legislation_relations(doc) -> List[Tuple]:
 
 def set_legislation_target(instrument: Token) -> str:
     """
-    Returns the legislation.gov.uk for the identified instrument, 
+    Returns the legislation.gov.uk for the identified instrument,
     e.g. http://www.legislation.gov.uk/ukpga/1999/17/contents.
 
     The legislation.gov API takes care of resolving requests for instruments (by title) with
@@ -122,7 +123,7 @@ def set_legislation_target(instrument: Token) -> str:
 
 def set_provision_target(url: str, subject: Token) -> str:
     """
-    Returns the legislation.gov.uk URL for the identified provision, 
+    Returns the legislation.gov.uk URL for the identified provision,
     e.g. http://www.legislation.gov.uk/ukpga/1998/42/section/20.
     """
     url = url.replace("contents", "section/")

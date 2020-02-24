@@ -2,9 +2,10 @@ from spacy.matcher import Matcher
 
 
 class SentenceSegmenter(object):
-    """Adds custom sentence boundaries to spaCy Doc. 
+    """Adds custom sentence boundaries to spaCy Doc.
     @param vocab: the language vocabulary from the spaCy nlp object
-    @param boundary_protection_rules: an optional list of labelled matching patterns that will explicitly prevent sentence boundaries
+    @param boundary_protection_rules: an optional list of labelled
+    matching patterns that will explicitly prevent sentence boundaries.
     """
 
     name = "sentence_segmenter"
@@ -77,7 +78,7 @@ class SentenceSegmenter(object):
                 doc[i].is_sent_start = False
             if doc[i].is_quote:
                 doc[i + 1].is_sent_start = False
-            if token.text == ")" and doc[i + 1].is_punct == False:
+            if token.text == ")" and doc[i + 1].is_punct is False:
                 doc[i + 2].is_sent_start = False
             if token.text == "Eu" and doc[i + 1].is_punct:
                 doc[i + 2].is_sent_start = False

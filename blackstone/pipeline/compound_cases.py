@@ -6,7 +6,7 @@ class CompoundCases:
     """
     Detects compound references to cases. Two styles of referencing are
     accommodated: common_pattern (e.g. Smith v Jones [2000] 1 WLR 123) and
-    the slightly old fashioned possessive_pattern (e.g in Hoadley's case 
+    the slightly old fashioned possessive_pattern (e.g in Hoadley's case
     [2018] 1 WLR 123).
 
     This class sets the `._.compound_cases` attribute on the spaCy doc.
