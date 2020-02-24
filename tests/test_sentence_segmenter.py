@@ -1,4 +1,3 @@
-# pylint: disable=no-self-use,invalid-name
 import unittest
 import spacy
 from blackstone.pipeline.sentence_segmenter import SentenceSegmenter

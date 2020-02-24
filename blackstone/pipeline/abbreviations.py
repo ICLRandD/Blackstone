@@ -220,7 +220,7 @@ class AbbreviationDetector:
         for match, start, end in global_matches:
             string_key = self.global_matcher.vocab.strings[
                 match
-            ]  # pylint: disable=no-member
+            ]
             to_remove.add(string_key)
             all_occurences[rules[string_key]].add(doc[start:end])
         for key in to_remove:
