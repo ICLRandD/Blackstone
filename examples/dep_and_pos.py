@@ -1,6 +1,6 @@
 """
 Visualise the dependency tree using spaCy's displaCy visualiser
-using Blackstone's custom dep palette 
+using Blackstone's custom dep palette.
 """
 
 import spacy

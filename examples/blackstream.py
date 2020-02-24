@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 import requests as r
 import bs4 as BeautifulSoup
 import spacy
@@ -32,7 +31,7 @@ st.write("My first app!")
 # court selector
 court = st.sidebar.selectbox(
     "Select a court",
-    ["Court of Appeal (Civil Division)", "Court of Appeal (Criminal Division)",],
+    ["Court of Appeal (Civil Division)", "Court of Appeal (Criminal Division)"],
 )
 
 # year selector

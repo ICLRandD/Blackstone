@@ -1,5 +1,5 @@
 """
-Query Blackstone's vector to find synonyms of a given word (in this case, defamation). 
+Query Blackstone's vector to find synonyms of a given word (in this case, defamation).
 """
 
 import spacy
