@@ -1,17 +1,12 @@
-numpy
-spacy==2.1.8
-pandas
-conllu
-
-#required for legislation_linker
-requests
-
 # Required for testing.
 pytest
 pytest-cov
 
 # code formatting
 black
+
+# code linting
+flake8
 
 # Required for releases.
 twine
