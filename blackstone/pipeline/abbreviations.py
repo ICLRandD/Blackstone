@@ -1,5 +1,5 @@
 """
-A slightly modified version of scispaCy's AbbreviationDetector. The only minor 
+A slightly modified version of scispaCy's AbbreviationDetector. The only minor
 modification has been to handle common instances in legal text in which short form
 abbreviations are bounded by quote marks, like so:
 
@@ -228,7 +228,7 @@ class AbbreviationDetector:
         for match, start, end in global_matches:
             string_key = self.global_matcher.vocab.strings[
                 match
-            ]  # pylint: disable=no-member
+            ]
             to_remove.add(string_key)
             all_occurences[rules[string_key]].add(doc[start:end])
         for key in to_remove:

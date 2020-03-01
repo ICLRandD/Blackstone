@@ -1,26 +1,24 @@
-import spacy
 from spacy.pipeline import EntityRuler
-from spacy.matcher import Matcher
 from spacy.tokens import Doc
 from collections import Counter
-from ..rules.concept_rules import CONCEPT_PATTERNS
+from blackstone.rules.concept_rules import CONCEPT_PATTERNS
 
 
 class Concepts:
     """
     A custom pipeline component for identifying legal "concepts"
-    in the doc. 
+    in the doc.
 
-    This process is rules-based as opposed to statistical. 
+    This process is rules-based as opposed to statistical.
 
     The doc is processed as usual, the EntityRuler is applied to the
     end of the pipeline, the patterns to look for are added to
-    the ruler, matches are identified in the doc and are labelled 
-    as CONCEPT entities. 
+    the ruler, matches are identified in the doc and are labelled
+    as CONCEPT entities.
 
     The concept pipe is added after the EntityRuler and the concepts
     in the doc are accessible via doc._.concepts as a Counter object.
-    
+
     Usage:
     concepts_pipe = Concepts(nlp)
     nlp.add_pipe(concepts_pipe)

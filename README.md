@@ -91,6 +91,14 @@ The second step is to install the [spaCy](https://spacy.io/) model. Install the 
 ```
 pip install https://blackstone-model.s3-eu-west-1.amazonaws.com/en_blackstone_proto-0.0.1.tar.gz
 ```
+
+## Installing from source
+If you are developing Blackstone, you can install from source like so:
+```
+pip install --editable .
+pip install -r dev-requirements.txt
+```
+
 ## About the model
 
 This is the very first release of Blackstone and the model is best viewed as a *prototype*; it is rough around the edges and represents the first step in a larger ongoing programme of open source research into NLP on legal texts being carried out by ICLR&D. 

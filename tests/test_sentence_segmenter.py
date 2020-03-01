@@ -1,4 +1,3 @@
-# pylint: disable=no-self-use,invalid-name
 import unittest
 import spacy
 from blackstone.pipeline.sentence_segmenter import SentenceSegmenter
@@ -13,10 +12,10 @@ class TestSentenceSegmenter(unittest.TestCase):
         self.nlp.add_pipe(self.sentence_segmenter, before="parser")
 
     def test_citation(self):
-        text = """See, most recently, R. (on the application of ClientEarth) v Secretary of State for the Environment, Food and Rural Affairs (No.2) [2017] P.T.S.R. 203. That's a good place to start."""
+        text = """See, most recently, R. (on the application of ClientEarth) v Secretary of State for the Environment, \
+        Food and Rural Affairs (No.2) [2017] P.T.S.R. 203. That's a good place to start."""
         doc = self.nlp(text)
         assert self.sum_iterable(doc.sents) == 2
 
     def sum_iterable(self, i):
-        return sum(1 for e in i) 
-        
+        return sum(1 for e in i)

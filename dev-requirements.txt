@@ -1,0 +1,12 @@
+# Required for testing.
+pytest
+pytest-cov
+
+# code formatting
+black
+
+# code linting
+flake8
+
+# Required for releases.
+twine
