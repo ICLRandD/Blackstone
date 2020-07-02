@@ -1,0 +1,10 @@
+{
+  "lang":"en",
+  "name":"core_law_md",
+  "sources": ["ICLR Law Reports", "English Web Treebank"],
+  "description":"Spacy Models for Legal Text.",
+  "author":"Daniel Hoadley and Mark Neumann",
+  "email": "research@iclr.co.uk",
+  "url":"https://github.com/ICLRandD/Blackstone",
+  "license":"Apache 2.0"
+}
