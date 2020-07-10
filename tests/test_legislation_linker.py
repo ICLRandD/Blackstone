@@ -9,6 +9,15 @@ from blackstone.utils.legislation_linker import (
     extract_legislation_relations,
 )
 
+def mock_set_legislation_target(token):
+    """
+    set_legislation_target makes requests to a website, which we shouldn't
+    run in automated tests.
+    """
+    if token.text == "Constitutional Reform and Governance Act 2010":
+        return "http://www.legislation.gov.uk/ukpga/2010/25/contents"
+
+    return "None"
 
 class TestLegislationLinker(unittest.TestCase):
     def setUp(self):
@@ -36,12 +45,12 @@ class TestLegislationLinker(unittest.TestCase):
         doc = self.nlp("Constitutional Reform and Governance Act 2010")
         instrument = doc[:]
         target = "http://www.legislation.gov.uk/ukpga/2010/25/contents"
-        assert set_legislation_target(instrument) == target
+        assert mock_set_legislation_target(instrument) == target
 
         # 'Act' not present
         doc = self.nlp("Constitutional Reform and Governance 2010")
         instrument = doc[:]
-        assert set_legislation_target(instrument) == "None"
+        assert mock_set_legislation_target(instrument) == "None"
 
     def test_set_provision_target(self):
         # Provision look up

@@ -28,8 +28,10 @@ def filter_spans(spans) -> List[Span]:
     """
     Filter out overlapping spans. Returns a list of Spans.
     """
+
     def get_sort_key(span: Span):
         return (span.end - span.start, span.start)
+
     sorted_spans = sorted(spans, key=get_sort_key, reverse=True)
     result = []
     seen_tokens = set()
@@ -40,11 +42,11 @@ def filter_spans(spans) -> List[Span]:
     return result
 
 
-def hasNumbers(inputString: str) -> bool:
+def has_numbers(input_string: str) -> bool:
     """
     Check if the provision candidate contains a digit.
     """
-    return any(char.isdigit() for char in inputString)
+    return any(char.isdigit() for char in input_string)
 
 
 def extract_legislation_relations(doc) -> List[Tuple]:
@@ -69,7 +71,7 @@ def extract_legislation_relations(doc) -> List[Tuple]:
             subject = [w for w in instrument.head.lefts if w.dep_ == "nsubj"]
             if subject:
                 subject = subject[0]
-                if hasNumbers(str(subject)):
+                if has_numbers(str(subject)):
                     # Get the URL for the instrument on legislation.gov.uk
                     target = set_legislation_target(instrument)
                     # Get the URL for the provision
@@ -84,7 +86,7 @@ def extract_legislation_relations(doc) -> List[Tuple]:
         elif instrument.dep_ == "pobj" and instrument.head.dep_ == "prep":
             target = set_legislation_target(instrument)
             if target:
-                if hasNumbers(str(instrument.head.head)):
+                if has_numbers(str(instrument.head.head)):
                     provision = set_provision_target(target, instrument.head.head)
                     head = instrument.head.head
                 else:
