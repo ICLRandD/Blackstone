@@ -24,6 +24,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r dev-requirements.txt
         pip install .
+        pip install https://blackstone-model.s3-eu-west-1.amazonaws.com/en_blackstone_proto-0.0.1.tar.gz
     - name: Lint with flake8
       run: |
         flake8 blackstone
