@@ -4,7 +4,8 @@ import spacy
 from blackstone.pipeline.abbreviations import (
     AbbreviationDetector,
     find_abbreviation,
-    containsQuotes,
+    contains,
+    filter_matches
 )
 
 
@@ -25,7 +26,7 @@ class TestAbbreviationDetector(unittest.TestCase):
         short = doc[2:5]
         short_form = short.text
         _, long_form = find_abbreviation(long, short)
-        assert containsQuotes(short_form, QUOTES) is True
+        assert contains(short_form, QUOTES) is True
 
         # Straight single quote
         doc = self.nlp("abbreviation ('abbrn')")
@@ -33,7 +34,7 @@ class TestAbbreviationDetector(unittest.TestCase):
         short = doc[2:5]
         short_form = short.text
         _, long_form = find_abbreviation(long, short)
-        assert containsQuotes(short_form, QUOTES) is True
+        assert contains(short_form, QUOTES) is True
 
         # Opening and closing single quotes
         doc = self.nlp("abbreviation (‘abbrn’)")
@@ -41,7 +42,7 @@ class TestAbbreviationDetector(unittest.TestCase):
         short = doc[2:5]
         short_form = short.text
         _, long_form = find_abbreviation(long, short)
-        assert containsQuotes(short_form, QUOTES) is True
+        assert contains(short_form, QUOTES) is True
 
         # Opening and closing double quotes
         doc = self.nlp("abbreviation (“abbrn”)")
@@ -49,7 +50,7 @@ class TestAbbreviationDetector(unittest.TestCase):
         short = doc[2:5]
         short_form = short.text
         _, long_form = find_abbreviation(long, short)
-        assert containsQuotes(short_form, QUOTES) is True
+        assert contains(short_form, QUOTES) is True
 
         # No quotes
         doc = self.nlp("abbreviation (abbrn)")
@@ -57,7 +58,7 @@ class TestAbbreviationDetector(unittest.TestCase):
         short = doc[2:5]
         short_form = short.text
         _, long_form = find_abbreviation(long, short)
-        assert containsQuotes(short_form, QUOTES) is False
+        assert contains(short_form, QUOTES) is False
 
     def test_find_abbreviation(self):
         # Basic case

@@ -89,9 +89,9 @@ def find_abbreviation(
     return short_form_candidate, long_form_candidate[starting_index:]
 
 
-def containsQuotes(str, set):
+def contains(str, set: Set[str]):
     """ Check whether sequence str contains ANY of the items in set. """
-    return 1 in [c in str for c in set]
+    return any([c in str for c in set])
 
 
 def filter_matches(
@@ -110,7 +110,7 @@ def filter_matches(
         quote_offset = 0
 
         # Adjust indexes where match is enclosed in quotation marks.
-        if containsQuotes(doc[start:end].text, QUOTES):
+        if contains(doc[start:end].text, QUOTES):
             start = match[1] + 1
             end = match[2] - 1
             quote_offset = 1
@@ -121,7 +121,9 @@ def filter_matches(
         if end - start > 3:
             # Long form is inside the parens.
             # Take two words before.
-            short_form_candidate = doc[start - 3 - quote_offset: start - 1 - quote_offset]
+            short_form_candidate = doc[
+                start - 3 - quote_offset : start - 1 - quote_offset
+            ]
             if short_form_filter(short_form_candidate):
                 candidates.append((doc[start:end], short_form_candidate))
         else:
@@ -132,7 +134,9 @@ def filter_matches(
             abbreviation_length = sum([len(x) for x in doc[start:end]])
             max_words = min(abbreviation_length + 5, abbreviation_length * 2)
             # Look up to max_words backwards
-            long_form_candidate = doc[max(start - max_words - 1 - quote_offset, 0) : start - 1 - quote_offset]
+            long_form_candidate = doc[
+                max(start - max_words - 1 - quote_offset, 0) : start - 1 - quote_offset
+            ]
             candidates.append((long_form_candidate, doc[start:end]))
     return candidates
 
@@ -226,9 +230,7 @@ class AbbreviationDetector:
         to_remove = set()
         global_matches = self.global_matcher(doc)
         for match, start, end in global_matches:
-            string_key = self.global_matcher.vocab.strings[
-                match
-            ]
+            string_key = self.global_matcher.vocab.strings[match]
             to_remove.add(string_key)
             all_occurences[rules[string_key]].add(doc[start:end])
         for key in to_remove:
