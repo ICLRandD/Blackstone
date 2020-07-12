@@ -16,12 +16,12 @@ mkdir -p release
 spacy init-model en ./release/base_small --freqs-loc ./for_mark/word_freqs.txt
 
 # Parser, starting from base model
-spacy train en ./release/parser_tagger_small ../UD_English-EWT/en_ewt-ud-train.json ../UD_English-EWT/en_ewt-ud-dev.json -G --pipeline tagger,parser --n-iter 10 --base-model ./release/base_small --meta-path ./data/meta_small.json --version ${VERSION}
+spacy train en ./release/parser_tagger_small ../UD_English-EWT/en_ewt-ud-train.json ../UD_English-EWT/en_ewt-ud-dev.json -G --pipeline tagger,parser --n-iter 10 --base-model ./release/base_small
 # NER, starting from best parsing model
-spacy train en ./release/ner_small ./train.json ./dev.json -G --pipeline ner --n-iter 10 --base-model ./release/parser_tagger_small/model-best --meta-path ./data/meta_small.json --version ${VERSION}
+spacy train en ./release/ner_small ./train.json ./dev.json -G --pipeline ner --n-iter 10 --base-model ./release/parser_tagger_small/model-best
 
 # Package
-spacy package release/ner_small/model-best release/
+spacy package release/ner_small/model-best release/ -m ./data/meta_small.json
 
 # Pop down in to directory, build package, copy it back up and return.
 current=${pwd}
