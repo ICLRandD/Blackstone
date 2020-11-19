@@ -48,7 +48,7 @@ Blackstone is a [spaCy](https://spacy.io/) model and library for processing long
 
 ## Why are we building Blackstone?
 
-The past several years have seen a surge in activity at the intersection of law and technology. However, in the United Kingdom, the overwhelming bulk of that activity has taken place in law firms and other commercial contexts. The consequence of this is that notwithstanding the never ending flurry of development in the legal-informatics space, almost none of the research is made available on an open-source basis. 
+The past several years have seen a surge in activity at the intersection of law and technology. However, in the United Kingdom, the overwhelming bulk of that activity has taken place in law firms and other commercial contexts. The consequence of this is that despite the never ending flurry of development in the legal-informatics space, almost none of the research is made available on an open-source basis. 
 
 Moreover, the majoritry of research in the UK legal-informatics domain (whether open or closed) has focussed on the development of NLP applications for automating contracts and other legal documents that are transactional in nature. This is understandable, because the principal benefactors of legal NLP research in the UK are law firms and law firms tend not to find it difficult to get their hands on transactional documentation that can be harnessed as training data. 
 
@@ -56,7 +56,7 @@ The problem, as we see it, is that legal NLP research in the UK has become over 
 
 ## What's special about Blackstone?
 
-* So far as we are aware, Blackstone is the first open source model trained for use on long-form texts containing common law entities and concepts.
+* So far as we are aware, Blackstone is the first open source model specifically trained for use on long-form texts containing common law entities and concepts.
 * Blackstone is built on [spaCy](https://spacy.io/), which makes it easy to pick up and apply to your own data.
 * Blackstone has been trained on data spanning a considerable temporal period (as early as texts drafted in the 1860s). This is useful because an interesting quirk of the common law is that older writings (particularly, judgments) go on to remain relevant for many, many years. 
 * It is free and open source
@@ -64,7 +64,7 @@ The problem, as we see it, is that legal NLP research in the UK has become over 
 
 ## Observations and other things worth noting:
 
-* Perfection is the enemy of the good. This is a prototype release of highly experimental project. As such, the accuracy of Blackstone's models leaves something to be desired (F1 on the NER is approx 70%). The accuracy of these models will improve over time. 
+* Perfection is the enemy of the good. This is a prototype release of a highly experimental project. As such, the accuracy of Blackstone's models leaves something to be desired (F1 on the NER is approx 70%). The accuracy of these models will improve over time. 
 * The models have been trained on English case law and the library has been built with the peculiarities of the legal system of England and Wales in mind. That said, the model has generalised well and should do a reasonably good job on Australasian, Canadian and American content, too.
 * The data used to train Blackstone's models was derived from the [Incorporated Council of Law Reporting for England and Wales'](https://iclr.co.uk/) archive of case reports and unreported judgments. That archive is proprietary and this prevents us from releasing any of the data used to train Blackstone. 
 * Blackstone is not a judge or litigation analytics tool.
@@ -313,14 +313,14 @@ nlp = spacy.load("en_blackstone_proto")
 compound_pipe = CompoundCases(nlp)
 nlp.add_pipe(compound_pipe)
 
-text = "As I have indicated, this was the central issue before the judge. On this issue the defendants relied (successfully below) on the decision of the High Court in Gelmini v Moriggia [1913] 2 KB 549. In Jone's case [1915] 1 KB 45, the defendant wore a hat."
+text = "As I have indicated, this was the central issue before the judge. On this issue the defendants relied (successfully below) on the decision of the High Court in Gelmini v Moriggia [1913] 2 KB 549. In Jones' case [1915] 1 KB 45, the defendant wore a hat."
 doc = nlp(text)
 
 for compound_ref in doc._.compound_cases:
     print(compound_ref)
     
 >>> Gelmini v Moriggia [1913] 2 KB 549
->>> Jone's case [1915] 1 KB 45
+>>> Jones' case [1915] 1 KB 45
 ```
 
 ### Legislation linker
