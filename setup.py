@@ -44,6 +44,6 @@ setup(
         "numpy",
         "pandas"
         ],
-    tests_require=["pytest", "pytest-cov"],
+    tests_require=["pytest==5.4.3", "pytest-cov==2.8.1"],
     python_requires=">=3.6.0",
 )
