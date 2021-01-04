@@ -38,7 +38,7 @@ setup(
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     license="Apache",
     install_requires=[
-        "spacy==2.1.8",
+        "spacy==2.1.9",
         "requests", # required for the legislation linker.
         "conllu",
         "numpy",
