@@ -44,7 +44,7 @@ class TestLegislationLinker(unittest.TestCase):
         # Act look up
         doc = self.nlp("Constitutional Reform and Governance Act 2010")
         instrument = doc[:]
-        target = "http://www.legislation.gov.uk/ukpga/2010/25/contents"
+        target = "https://www.legislation.gov.uk/ukpga/2010/25/contents"
         assert mock_set_legislation_target(instrument) == target
 
         # 'Act' not present
@@ -55,13 +55,13 @@ class TestLegislationLinker(unittest.TestCase):
     def test_set_provision_target(self):
         # Provision look up
         doc = self.nlp("section 20")
-        url = "http://www.legislation.gov.uk/ukpga/2010/25/contents"
-        target = "http://www.legislation.gov.uk/ukpga/2010/25/section/20"
+        url = "https://www.legislation.gov.uk/ukpga/2010/25/contents"
+        target = "https://www.legislation.gov.uk/ukpga/2010/25/section/20"
         assert set_provision_target(url, doc) == target
 
         # No number matches
         doc = self.nlp("section")
-        url = "http://www.legislation.gov.uk/ukpga/2010/25/contents"
+        url = "https://www.legislation.gov.uk/ukpga/2010/25/contents"
         target = "None"
         assert set_provision_target(url, doc) == target
 
