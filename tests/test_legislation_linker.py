@@ -15,7 +15,7 @@ def mock_set_legislation_target(token):
     run in automated tests.
     """
     if token.text == "Constitutional Reform and Governance Act 2010":
-        return "http://www.legislation.gov.uk/ukpga/2010/25/contents"
+        return "https://www.legislation.gov.uk/ukpga/2010/25/contents"
 
     return "None"
 
@@ -73,7 +73,7 @@ class TestLegislationLinker(unittest.TestCase):
         assert str(relations[0][0]) == "None"
         assert relations[0][1] == "None"
         assert str(relations[0][2]) == "Constitutional Reform and Governance Act 2010"
-        assert relations[0][3] == "http://www.legislation.gov.uk/ukpga/2010/25/contents"
+        assert relations[0][3] == "https://www.legislation.gov.uk/ukpga/2010/25/contents"
 
         # Instrument is the object of a preposition and includes a provision reference
         text = "The Secretary of State went on to describe the negative resolution procedure set out in section 20 of the Constitutional Reform and Governance Act 2010."
@@ -81,10 +81,10 @@ class TestLegislationLinker(unittest.TestCase):
         relations = extract_legislation_relations(doc)
         assert str(relations[0][0]) == "section 20"
         assert (
-            relations[0][1] == "http://www.legislation.gov.uk/ukpga/2010/25/section/20"
+            relations[0][1] == "https://www.legislation.gov.uk/ukpga/2010/25/section/20"
         )
         assert str(relations[0][2]) == "Constitutional Reform and Governance Act 2010"
-        assert relations[0][3] == "http://www.legislation.gov.uk/ukpga/2010/25/contents"
+        assert relations[0][3] == "https://www.legislation.gov.uk/ukpga/2010/25/contents"
 
         # Instrument is a direct object without a provision reference
         text = (
@@ -95,4 +95,4 @@ class TestLegislationLinker(unittest.TestCase):
         assert str(relations[0][0]) == "None"
         assert relations[0][1] == "None"
         assert str(relations[0][2]) == "Constitutional Reform and Governance Act 2010"
-        assert relations[0][3] == "http://www.legislation.gov.uk/ukpga/2010/25/contents"
+        assert relations[0][3] == "https://www.legislation.gov.uk/ukpga/2010/25/contents"
