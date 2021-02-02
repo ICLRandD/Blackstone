@@ -24,7 +24,7 @@ def compute_vectors(input_path: Path, output_path: Path):
     sentences = LineSentence(input_path)
     bigram_transformer = Phrases(sentences)
     model = Word2Vec(
-        bigram_transformer[sentences], size=150, window=5, min_count=5, workers=4
+        bigram_transformer[sentences], size=100, window=5, min_count=5, workers=4
     )
     print(f"Saving vectors to {output_path}")
     model.wv.save_word2vec_format(output_path, binary=False)
